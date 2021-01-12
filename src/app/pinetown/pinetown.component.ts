@@ -62,6 +62,8 @@ export class PinetownComponent implements OnInit {
     // other options
 }
 
+  public a = 'active';
+
 onRowClicked(event) {
   const url = window.location.href;
   window.open(`/#/residential/${event.data.id}/view`, '_blank');
@@ -70,15 +72,25 @@ onRowClicked(event) {
   newListing(){
     this.router.navigate([`/residential/new`]);
   }
+
   ngOnInit() {
+    this.gridData(this.a);
+    
+  }
+
+
+  gridData(a){
+    
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
       .set('content-type', 'application/json');
 
     this.http
       .get<any[]>('https://whitefang-digitaloffice.form.io/residentials1/submission?data.user.data.office._id=5e398a8993bcd0ba890f7cde&sort=-created&skip=0&limit=1000', { headers })
       .subscribe((res) => {
+        this.data = [];
         res.forEach(element => {
-          return this.data.push({
+          if(a == element.data.listingStatus){
+           this.data.push({
             "address": element.data.address.formatted_address,
             "listingType": element.data.listingType,
             "propertyType": element.data.propertyType.data.label,
@@ -94,11 +106,13 @@ onRowClicked(event) {
             "createdTime": element.data.createdTime,
             "lastUpdated": element.data.lastUpdated
           });
+        }
+
+        return this.data;
         });
         this.rowData = this.data;
       })
   }
-
-
 }
+
 

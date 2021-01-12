@@ -60,7 +60,7 @@ export class EmpangeniComponent implements OnInit {
 
     // other options
 }
-
+public a = 'active';
 onRowClicked(event) {
   const url = window.location.href;
   window.open(`/#/residential/${event.data.id}/view`, '_blank');
@@ -69,14 +69,17 @@ onRowClicked(event) {
   newListing(){
     this.router.navigate([`/residential/new`]);
   }
-  ngOnInit() {
+  gridData(a){
+
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
       .set('content-type', 'application/json');
 
     this.http
       .get<any[]>('https://whitefang-digitaloffice.form.io/residentials1/submission?data.user.data.office._id=5e5cc80ab768a2bb9a4426b4&sort=-created&skip=0&limit=1000', { headers })
       .subscribe((res) => {
+        this.data = [];
         res.forEach(element => {
+          if(a == element.data.listingStatus){
           return this.data.push({
             "address": element.data.address.formatted_address,
             "listingType": element.data.listingType,
@@ -93,11 +96,14 @@ onRowClicked(event) {
             "createdTime": element.data.createdTime,
             "lastUpdated": element.data.lastUpdated
           });
+        }
         });
         this.rowData = this.data;
       })
   }
-
-
+  
+  ngOnInit() {
+    this.gridData(this.a);
+}
 }
 
