@@ -1,0 +1,27 @@
+<div class="mxpro-mb-30" >
+  <div class="row m-t-15">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <span class="badge badge-primary float-right">{{ service.resource?.data.status }}</span>
+          <h5>Contact Information</h5>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="md-v-line"></div><i class="fas fa-user mr-4 pr-3"></i> 
+              {{ service.resource?.data.fullName }}
+            </li>
+            <li class="list-group-item">
+              <div class="md-v-line"></div><i class="fas fa-envelope mr-5"></i><a target="_blank" href="mailto:{{ service.resource?.data.email }}">{{ service.resource?.data.email }}</a>
+            </li>
+            <li class="list-group-item">
+              <div class="md-v-line"></div><i class="fas fa-phone mr-5"></i>{{ service.resource?.data.mobile }}
+            </li>
+            <li class="list-group-item">
+              <div class="md-v-line"></div><i class="fas fa-comment mr-5"></i>{{ service.resource?.data.message }}
+            </li>
+          </ul>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>

@@ -1,0 +1,16 @@
+<div class="row home-header"  *ngIf="auth.authenticated">
+  <div class="col-md-12">
+    <h1 class="font-weight-bolder" *ngIf="auth.user.data">Hi {{ auth.user.data.firstName }},<br /> Welcome back to the
+      Digital Office</h1>
+  </div>
+</div>
+<div class="row second-home-header"  *ngIf="!auth.authenticated">
+  <div class="col-md-12">
+    <h1 class="font-weight-bolder  office-text" *ngIf="auth.user.data">Welcome to the
+      Digital Office</h1>
+      <h1 class="font-weight-bolder welcome-text">Welcome to the Digital Office</h1>
+      <h4><a href="/#/auth/login">Login</a> to Start Working</h4>
+  </div>
+</div>
+<app-hero></app-hero>
+

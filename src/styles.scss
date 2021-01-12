@@ -1,0 +1,572 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// AG- grid
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+
+.ag-header.ag-focus-managed.ag-pivot-off {
+    background: #000;
+}
+
+.ag-header.ag-focus-managed.ag-pivot-off span {
+    color: #fff;
+}
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$angular-app-starterkit-primary: mat-palette($mat-indigo);
+$angular-app-starterkit-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$angular-app-starterkit-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$angular-app-starterkit-theme: mat-light-theme($angular-app-starterkit-primary, $angular-app-starterkit-accent, $angular-app-starterkit-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($angular-app-starterkit-theme);
+
+$white:    #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #868e96;
+$gray-700: #495057;
+$gray-800: #373a3c;
+$gray-900: #212529;
+$black:    #000;
+
+$blue:    #2780E3;
+$indigo:  #6610f2;
+$purple:  #613d7c;
+$pink:    #e83e8c;
+$red:     #FF0039;
+$orange:  #F2661F;
+$yellow:  #BED32B;
+$green:   #3FB618;
+$teal:    #20c997;
+$cyan:    #9954BB;
+$lightblue: lighten($blue, 20%);
+
+$primary:       $blue;
+$secondary:     $orange;
+$success:       $green;
+$info:          $lightblue;
+$warning:       $yellow;
+$danger:        $red;
+$light:         $gray-100;
+$dark:          #000;
+
+@import "~bootswatch/dist/cosmo/_variables.scss";
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootswatch/dist/cosmo/_bootswatch.scss";
+$fa-font-path: '../node_modules/font-awesome/fonts';
+@import '~font-awesome/scss/font-awesome';
+
+
+// globally css class
+.mxpro-mb-30
+{
+	margin-bottom: 30px;
+}
+.mxpro-mb-10
+{
+	margin-bottom: 10px;
+}
+
+.mxpro-mt-30
+{
+	margin-top: 30px;
+}
+
+.builder-sidebar .btn {color: #ffffff;}
+
+// globally css class   end
+
+// header css 
+
+.mxpro-header{
+    background-color: #FFF200;
+    .navbar-brand{
+		font-size: 1.75rem;
+        img {
+            max-width: 250px;            
+        }
+    }
+
+    .Logout-link{
+        text-decoration: underline;
+    }
+}
+
+// fotter css
+
+.mxpro-footer{
+	margin-top: 30px; 
+	bottom: 0;
+}
+
+// fotter css end
+
+.ais-SearchBox-reset {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	border: none;
+	background-color: transparent;
+
+	.ais-SearchBox-resetIcon {
+		width: 14px;
+	}
+}
+
+.ais-SearchBox-form {
+	position: relative;
+}
+
+
+
+.modal-dialog {min-width:590px !important;}
+
+
+.hits-list {
+	// list-style: none;
+	// padding: 0;
+	// margin: 0;
+	// height: 100%;
+	background-color: #fff;
+	// font-family: Open Sans,system-ui,BlinkMacSystemFont,-apple-system,sans-serif;
+	border-top-style: solid;
+	border-left: 1px solid rgba(197, 201, 224, 0.3);
+	border-bottom: 1px solid rgba(197, 201, 224, 0.3);
+	border-right: 1px solid rgba(197, 201, 224, 0.3);
+	border-top-color: rgba(197, 201, 224, 0.3);
+	border-radius: 4px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	-webkit-box-shadow: 0 12px 23px 0 rgba(63, 63, 68, 0.1);
+	box-shadow: 0 12px 23px 0 rgba(63, 63, 68, 0.1);
+	margin-bottom: 3em;
+
+	.hit-list-card {
+		position: relative;
+		padding: 2em;
+
+		&::after {
+			content: "";
+			border-bottom: 1px solid;
+			border-color: rgba(132, 138, 184, 0.2);
+			width: calc(100% - 4em);
+			position: absolute;
+			left: 2em;
+			right: 2em;
+			bottom: 0;
+		}
+	}
+
+	.ais-Hits-item {
+		transition: all 0.2s ease-out;
+		cursor: pointer;
+		&:last-child {
+			border-bottom: none;
+			padding-bottom: 0;
+		}
+		&:hover {
+			background-color: #f5f5fa;
+		}
+	}
+}
+
+.left-panel {
+	float: left;
+	width: 250px;
+}
+.right-panel {
+	margin-left: 260px;
+}
+.ais-InstantSearch {
+	max-width: 960px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.search-container {
+	margin-bottom: 2em;
+}
+
+
+
+.hit-description {
+	color: #888;
+	font-size: 14px;
+	margin-bottom: 0.5em;
+}
+
+.ais-SearchBox-input {
+	width: calc(50% - 1rem);
+	width: 100%;
+	color: inherit;
+	font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, sans-serif;
+	height: 40px;
+	border-radius: 4px;
+	background-color: #f5f5fa;
+	overflow: visible;
+	border: none !important;
+	padding-right: 136px;
+	padding-left: 40px;
+	outline: none !important;
+}
+
+.ais-SearchBox-submit {
+	display: none;
+}
+
+
+.logo {
+  height: 2.5em;
+}
+
+.text-blue {
+  color: #127ABF;
+}
+
+.text-green {
+  color: #449414;
+}
+
+.hero-image {
+  display: inline;
+  height: 2em;
+}
+
+#main {
+  margin-top: 10px;
+}
+
+.nav-link{
+  color: #000000;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+  border-color: #e9ecef #e9ecef #dee2e6;
+  color: #000000;
+  text-decoration: underline;
+  
+}
+
+.nav-item:hover {
+	color:#000000 !important;
+}
+.nav-link:hover
+{
+	color:#000000 !important;
+	text-decoration: underline;
+}
+.nav-tabs .nav-link {
+  border: 1px solid #e9ecef;
+  color: #000000;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+  font-weight: bold;
+}
+.slider-image {
+  height:450px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.btn-primary {
+    background-color: #FFF200 !important;
+    border-color: #000 !important;
+    color: #000000 !important;
+    border-radius: 5px;
+}
+
+.pd-colour{
+  background-color: #FFF200;
+  color: #000000;
+  padding: 5px;
+}
+
+.bg-default {
+  background-color: #000000 !important;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+
+thead{
+  background-color:#000000 !important;
+  color: #FFFFFF !important;
+  text-align: center;
+}
+#main > ng-component > formio-grid > div > table > thead > tr > th > a {
+  font-weight: 700 !important;
+}
+
+.table{
+  color: #000000;
+}
+
+.pagination .page-item.active .page-link{
+  background-color: #000000;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+a.nav-link:hover{
+  color: #fff200;
+}
+
+.card .card-body .card-text{
+  color: #FFFFFF;
+}
+
+.badge-primary{
+  background-color: #3FFBFF !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 0.85rem 1.25rem;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.navbar .dropdown-menu a:hover{
+  font-weight: 500;
+}
+
+.code-display{
+	margin-bottom:0.5rem; font-size: 90%; color: #c310f9;
+}
+
+.accordion > .card > .card-header{
+  background-color: #000000;
+}
+
+.btn-link{
+  color:#ffffff !important;
+  font-weight: 700;
+}
+
+.top-form-field{
+  margin-top:25px;
+}
+
+.btn{border-radius: 5px;}
+
+#main > app-user-resource > ng-component > formio-grid > div > table > thead > tr > th > a {
+  font-weight: 700 !important;
+}
+
+.additionalFeatures{
+  margin-top:25px;
+  padding-top: 15px;
+  border-top: 1px solid #e9ecef;
+}
+
+h5{
+  font-weight: 700;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.formio-component-images label+div {
+	display: flex;
+	flex-wrap: wrap;
+  }
+  
+  .formio-component-images label+div > div {
+	width: 24.3%;
+  }
+  .formio-component-images label+div > div img {
+	max-height: 200px;
+	object-fit: cover;
+	min-height: 200px;
+	margin-bottom: 12px;
+  }
+  .login-h1 {
+	text-align:center;
+	margin-top: 60px;
+  }
+  .login-h3 {
+	text-align:center
+  }
+  .login-body {
+	margin-top:30px;
+  }
+  .resource-list {
+	margin-bottom: 10px;
+  }
+  .user-header-view {
+	margin-bottom:30px;
+  }
+  .user-view-content {
+	margin-bottom: 30px;
+	.card-cascade {
+		margin-left:15px;
+		.avatar {
+			img {
+				max-width:185px;margin: 0 auto;margin-top:15px;
+			}
+		}
+		.card-body-cascade { 
+			.card-title {
+				margin-bottom:0.25rem;
+			}
+		}
+	}
+  }
+
+  .residential-view {
+	margin-bottom: 30px;
+	.card-header #headingOne {
+		button{
+			text-align: left;
+			span{
+				color: #ffffff;
+			}
+		}
+	}
+	.card-header #headingTwo {
+		button{
+			text-align: left;
+			span{
+				color: #ffffff;
+			}
+		}
+	}
+	.card-header #headingThree {
+		button{
+			text-align: left;
+			span{
+				color: #ffffff;
+			}
+		}
+	}
+	.card-header #headingFour {
+		button{
+			text-align: left;
+			span{
+				color: #ffffff;
+			}
+		}
+	}
+	.bg-light {
+		margin-top: 30px;
+		.card-body { 
+			.profile-pic{
+				img { 
+					max-height: 200px; max-width:200px; object-fit:cover;margin-bottom:15px;
+				}
+			}
+		}
+	}
+  }
+
+  .residential-index {
+	margin-bottom: 20px; text-align: center;margin-bottom: 20px;
+	.fa-home{
+		color: #000;
+	}
+  }
+  .residential-index-hr {
+	margin-top: 40px; margin-bottom:20px;
+  }
+  .accordion .residential-index {
+	.card {
+		.card-header {
+			background-color: #cccccc;
+			button {
+				color: #ffffff;
+			}
+		}
+	}
+  }
+
+  .home-header {
+	.col-md-12 {
+		text-align: center;
+		h1 {
+			margin-top: 30px; margin-bottom: 60px;
+		}
+	}
+  }
+  .second-home-header {
+	.col-md-12 {
+		text-align: center;
+
+		.office-text{
+			margin-top: 30px; margin-bottom: 60px;
+		}
+		.welcome-text{
+			
+			margin-top: 30px; margin-bottom: 20px;
+			
+		}
+	}
+  }
+  .brand-section {
+	.justify-content-center {
+		padding-top:60px;
+		h2 {
+			margin-bottom: 20px;
+			.fa-book-reader {
+				color: #000;
+			}
+		}
+	}
+  }
+  .brand-section-one {
+	.view {
+		img {
+			margin-top:20px;
+		}
+	}
+  }
+  .brand-section-two {
+	section {
+		margin-top: 40px;
+		.view {
+		img {
+			margin-top:20px;
+		}
+	  }
+	}
+  }
+  .brand-section-three {
+	  .view {
+		img {
+			margin-top:20px
+		}
+		h5 {
+			padding-left: 7px;
+		}
+	  }
+  }
+  .brand-section-four {
+	.view {
+	  img {
+		  margin-top:20px
+	  }
+	}
+}

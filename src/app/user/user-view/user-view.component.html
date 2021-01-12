@@ -1,0 +1,153 @@
+<div class="mb-2 card border">
+  <div ref="header" class="card-header bg-default user-header-view">
+    <span class="mb-0 card-title">
+      Property Practitioner Information
+    </span>
+  </div>
+
+  <div class="user-view-content">
+    <div class="row m-t-15">
+      <div class="col-md-4">
+        <!-- Card Regular -->
+        <div class="card card-cascade">
+
+          <!-- Card image -->
+          <div class="view view-cascade overlay">
+            <!-- Avatar -->
+            <div class="avatar mx-auto white">
+              <img *ngIf="service.resource?.data?.profilePhoto?.length"
+                src="{{ service.resource?.data.profilePhoto[0]['url'] }}" class="rounded-circle"
+                alt="Property Practitione">
+            </div>
+
+
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body card-body-cascade text-center">
+
+            <!-- Title -->
+            <h4 class="card-title"><strong>{{ service.resource?.data?.firstName }}
+                {{ service.resource?.data?.lastName }}</strong></h4>
+            <!-- Subtitle -->
+            <h6 class="font-weight-bold indigo-text py-2">{{ service.resource?.data?.cityRef?.city }} |
+              {{ service.resource?.data.provinceRef?.data?.province }}</h6>
+            <h6 class="font-weight-bold py-2">{{ service.resource?.data?.mobile }}<br />
+              {{ service.resource?.data?.email }}</h6>
+            <!-- Text -->
+            <p class="card-text">{{ service.resource?.data?.profile }}
+            </p>
+
+          </div>
+
+        </div>
+        <!-- Card Regular -->
+        <!--
+      <div class="card">
+        <div class="card-body">
+    
+          <div class="profile-pic">
+    
+            <img *ng-if="service.resource?.data.profilePhoto" alt="user"
+              src="{{ service.resource?.data.profilePhoto['0']['url'] }}" width="95%" style="max-height: 200px; max-width:200px; object-fit:cover;margin-bottom:15px;">
+            
+          </div>
+            <h4 class="text-center">{{ service.resource?.data.firstName }} {{ service.resource?.data.lastName }}</h4>
+            <h5 class="text-center">{{ service.resource?.data.agentJobTitle }}</h5>
+          </div>
+      </div>
+        -->
+      </div>
+      <div class="col-md-8">
+
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table no-border room-detail m-b-0">
+              <tbody>
+                <tr>
+                  <td>Job Title:</td>
+                  <td>
+                    <span *ngIf="checkType(service.resource?.data.agentJobTitle) == 'string'"
+                      class="text-capitalize">{{ service.resource?.data?.agentJobTitle }}</span>
+                    <span *ngIf="checkType(service.resource?.data.agentJobTitle) == 'object'"
+                      class="text-capitalize">{{ service.resource?.data?.agentJobTitle?.label }}</span>
+
+                  </td>
+                </tr>
+                <tr>
+                  <td>Is Broker:</td>
+                  <td>
+                    <span class="text-capitalize">{{ service.resource?.data?.isBroker }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Published to Property 24:</td>
+                  <td>
+                    <span class="text-capitalize">{{ service.resource?.data?.publishedtoP24 }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Published to Private Property :</td>
+                  <td>
+                    <span class="text-capitalize">{{ service.resource?.data?.publishedToPrivateProperty }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <table class="table no-border room-detail m-b-0">
+              <tbody>
+                <tr>
+                  <td>Fidelity Fund Certificate Number:</td>
+                  <td>
+                    <span class="text-capitalize">{{ service.resource?.data?.fidelityFundCertificateNumber }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Fidelity Fund Certificate Year:</td>
+                  <td>
+                    <span class="text-capitalize">{{ service.resource?.data?.fidelityFundCertificateYear	 }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>ID Number:</td>
+                  <td>
+                    <span class="text-capitalize">{{ service.resource?.data?.agentIdNumber }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Bank Account Number:</td>
+                  <td>
+                    <span class="text-capitalize">{{ service.resource?.data?.bankAccountNumber }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Bank Name:</td>
+                  <td>
+                    <span class="text-capitalize">{{ service.resource?.data?.bankName }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Branch Code:</td>
+                  <td>
+                    <span class="text-capitalize">{{ service.resource?.data?.branchCode }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Account Type:</td>
+                  <td>
+                    <span class="text-capitalize">{{ service.resource?.data?.province?.data?.accountType }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

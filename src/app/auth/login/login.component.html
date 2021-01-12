@@ -1,0 +1,7 @@
+<h1 class="font-weight-bolder login-h1">Welcome to the Digital Office</h1>
+<h3 class="login-h3">Use your sign-in credentials to login</h3>
+<div class="row">
+    <div class="col-md-4 offset-md-4 login-body">
+        <formio [src]="service.loginForm" (submit)="service.onLoginSubmit($event)"></formio>
+    </div>
+</div>

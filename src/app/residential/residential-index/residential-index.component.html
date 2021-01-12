@@ -1,0 +1,17 @@
+<h2 class="residential-index"><i class="fas fa-home"></i> Residential Listings</h2>
+<ag-grid-angular
+    #myGrid
+    style="height: 556px;"
+    class="ag-theme-balham"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [gridOptions]="gridOptions"
+    [pagination]=true
+    [paginationPageSize]="17"
+    (rowClicked)="onRowClicked($event)"
+>
+</ag-grid-angular>
+
+<button class="btn btn-primary pull-left float-left" (click) = "newListing()"><i class="glyphicon glyphicon-plus fa fa-plus"></i> New Listing</button>
+<hr class="residential-index-hr" />
+

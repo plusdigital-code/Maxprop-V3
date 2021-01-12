@@ -1,0 +1,24 @@
+<div class="posi-relative">
+	<app-header></app-header>
+	<div class="container min-h-calc"  id="main">
+		<div class="search-container m-top-30" *ngIf="showSearch">
+			<ais-instantsearch [config]="config">
+				<ais-search-box></ais-search-box>
+				<div id='results'>
+					<ais-hits>
+						<ng-template let-hits="hits">
+							<div class="hits-list">
+								<div *ngFor="let hit of hits" class="ais-Hits-item">
+									<div *ngIf="(currentWebUrl == '/commercial' || currentWebUrl == '/residential' )" style="display: flex; align-items: center;" class="hit-list-card" (click)='cardSelected(hit)'><div style="width:100px; height: 65px; overflow: hidden; margin-right: 20px;"><img style="max-width:100% ;object-fit:cover;" src = "{{hit[cover]}}"/></div><div>{{hit[fieldToDisplay]}}<br><small>{{hit[code]}}</small><br><strong>{{hit[price]}}</strong> | <strong>Floor Size: {{hit[floor] | number}}m²</strong></div></div>
+									<div *ngIf="(currentWebUrl !== '/commercial' && currentWebUrl !== '/residential')" class="hit-list-card" (click)='cardSelected(hit)'>{{hit[fieldToDisplay]}}</div>
+								</div>
+							</div>
+						</ng-template>
+					</ais-hits>
+				</div>
+			</ais-instantsearch>
+		</div>
+		<router-outlet></router-outlet>
+	</div>
+	<app-footer></app-footer>
+</div> 

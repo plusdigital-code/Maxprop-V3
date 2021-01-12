@@ -1,0 +1,77 @@
+<nav class="navbar sticky-top navbar-expand-lg font-weight-bold  mxpro-header" >
+  <div class="container">
+    <a class="navbar-brand" href="#" ><img class="logo" src="../../assets/maxprop-logo.jpg" /></a>
+    <ul class="nav navbar-nav mr-auto">
+      
+      <!--
+      <li class="nav-item" routerLinkActive="form" *ngIf="auth.is.administrator">
+        <a class="nav-link" routerLink="form"><i class="fa fa-wpforms"></i> Forms</a>
+      </li>
+      -->
+      <li class="nav-item" routerLinkActive="home" *ngIf="auth.authenticated">
+        <a class="nav-link" routerLink="home"> Residential Listings</a>
+      </li>
+      <li class="nav-item" routerLinkActive="commercial" *ngIf="auth.authenticated">
+        <a class="nav-link" routerLink="commercial"> Commercial Listings</a>
+      </li>
+      <!--
+      <li class="nav-item" routerLinkActive="contact" *ngIf="auth.authenticated">
+        <a class="nav-link" routerLink="contact"> Contacts</a>
+      </li>
+      -->
+      <!--
+      <li class="nav-item" routerLinkActive="notes" *ngIf="auth.authenticated">
+        <a class="nav-link" routerLink="notes"> Notes</a>
+      </li>
+-->
+<li class="nav-item dropdown" *ngIf="auth.authenticated">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Contacts
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" routerLink="contact">Residential Contacts</a>
+    <a class="dropdown-item" routerLink="commercial-contact">Commercial Contacts</a>
+  </div>
+</li>  
+      <li class="nav-item dropdown" *ngIf="auth.is.administrator">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Admin Menu
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="user">Property Practitioners</a>
+          <a class="dropdown-item" routerLink="office">Offices</a>
+          <a class="dropdown-item" routerLink="seller-leads">Seller Leads</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="account">Account</a>
+          <a class="dropdown-item" routerLink="admin">Admin Users</a>
+          <a class="dropdown-item" routerLink="form">Forms</a>
+        </div>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
+      <li class="nav-item dropdown" *ngIf="auth.authenticated">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Quick Links
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <!--
+          <a href="https://opencampus.virbela.com/register?redirect=download" target="_blank" class="dropdown-item">Virbela</a>-->
+          <!--
+          <a class="dropdown-item" routerLink="office">Netready</a>-->
+          <!--<a href="https://www.office.com/" target="_blank" class="dropdown-item">Office 365</a>-->
+          <a class="dropdown-item" routerLink="brand">Brand Guide</a>
+          <a class="dropdown-item" routerLink="support">Help</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="user/{{ auth?.user?._id }}">My Profile</a>
+          <a class="dropdown-item" routerLink="user/changePassword">Change Password</a>
+        </div>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="!auth.authenticated">
+        <a class="nav-link" routerLink="auth/login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="auth.authenticated">
+        <a class="nav-link Logout-link" routerLink="auth/login" (click)="auth.logout();" ><span class="glyphicon glyphicon-off"></span> Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

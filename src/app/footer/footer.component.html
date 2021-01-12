@@ -1,0 +1,79 @@
+<!-- Footer -->
+<footer class="page-footer mxpro-footer font-small black pt-4" >
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+   <!-- Grid column -->
+   <div class="col-md-3 mb-md-0 mb-3">
+
+    <!-- Links -->
+    <h5 class="text-uppercase">Quick Links</h5>
+
+    <ul class="list-unstyled" *ngIf="auth.authenticated">
+     
+      <li>
+        <a href="https://www.office.com/" target="_blank">MS Office</a>
+      </li>
+      <li>
+        <a routerLink="brand">Brand Guide</a>
+      </li>
+      <li>
+        <a routerLink="support">Help & Support</a>
+      </li>
+    </ul>
+
+  </div>
+  <!-- Grid column -->
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3 text-center" >
+        <!-- Content -->
+        <h5 class="text-uppercase" >The Digital Office</h5>
+        <p>The Tools to Win</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3 text-right" >
+
+        <!-- Links -->
+        <h5 class="text-uppercase">My Links</h5>
+
+        <ul class="list-unstyled" *ngIf="auth.authenticated">
+          <li>
+            <a routerLink="residential">Residential Listings</a>
+          </li>
+          <li>
+            <a routerLink="commercial">Commercial Listings</a>
+          </li>
+          <li>
+            <a routerLink="user/{{ auth?.user?._id }}">My Profile</a>
+          </li>
+          <li>
+            <a routerLink="user/changePassword">Change Password</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://maxprop.digital/" target="_blank"> Maxprop</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
