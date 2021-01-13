@@ -61,7 +61,7 @@ export class BereaComponent implements OnInit {
 
     // other options
 }
-
+public a = 'active';
 onRowClicked(event) {
   const url = window.location.href;
   window.open(`/#/residential/${event.data.id}/view`, '_blank');
@@ -70,33 +70,42 @@ onRowClicked(event) {
   newListing(){
     this.router.navigate([`/residential/new`]);
   }
-  ngOnInit() {
-    let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
-      .set('content-type', 'application/json');
+  gridData(a){
 
-    this.http
-      .get<any[]>('https://whitefang-digitaloffice.form.io/residentials1/submission?data.user.data.office._id=5e39ee247827cdd073865778&sort=-created&skip=0&limit=1000', { headers })
-      .subscribe((res) => {
-        res.forEach(element => {
-          return this.data.push({
-            "address": element.data.address.formatted_address,
-            "listingType": element.data.listingType,
-            "propertyType": element.data.propertyType.data.label,
-            "primaryProperty": element.data.user.data?element.data.user.data.firstName+" "+element.data.user.data.lastName:'',
-            "price": element.data.price,
-            "suburb": element.data.suburbRef.data.suburb,
-            "bedrooms": element.data.bedrooms,
-            "unitNumber": element.data.unitNumber ? element.data.unitNumber : '',
-            "sectionalSchemeName": element.data.sectionalSchemeName,
-            "code": element.data.mandateMetaData.code,
-            "id": element._id,
-            "listingStatus": element.data.listingStatus,
-            "createdTime": element.data.createdTime,
-            "lastUpdated": element.data.lastUpdated
-          });
+    let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
+    .set('content-type', 'application/json');
+
+  this.http
+    .get<any[]>('https://whitefang-digitaloffice.form.io/residentials1/submission?data.user.data.office._id=5e39ee247827cdd073865778&sort=-created&skip=0&limit=1000', { headers })
+    .subscribe((res) => {
+      this.data = [];
+
+      res.forEach(element => {
+        if(a == element.data.listingStatus){
+        return this.data.push({
+          "address": element.data.address.formatted_address,
+          "listingType": element.data.listingType,
+          "propertyType": element.data.propertyType.data.label,
+          "primaryProperty": element.data.user.data?element.data.user.data.firstName+" "+element.data.user.data.lastName:'',
+          "price": element.data.price,
+          "suburb": element.data.suburbRef.data.suburb,
+          "bedrooms": element.data.bedrooms,
+          "unitNumber": element.data.unitNumber ? element.data.unitNumber : '',
+          "sectionalSchemeName": element.data.sectionalSchemeName,
+          "code": element.data.mandateMetaData.code,
+          "id": element._id,
+          "listingStatus": element.data.listingStatus,
+          "createdTime": element.data.createdTime,
+          "lastUpdated": element.data.lastUpdated
         });
-        this.rowData = this.data;
-      })
+      }
+      });
+      this.rowData = this.data;
+    })
+
+  }
+  ngOnInit() {
+    this.gridData(this.a);
   }
 
 
