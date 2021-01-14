@@ -21,6 +21,7 @@ export class PinetownComponent implements OnInit {
   title = 'my-app';
   public data = [];
   public res: string[] = [];
+  private gridApi;
 
   columnDefs = [
     { headerName: 'Status',width: 80, field: 'listingStatus',filter: 'agTextColumnFilter', },
@@ -62,7 +63,17 @@ export class PinetownComponent implements OnInit {
     // other options
 }
 
+clearFilters() {
+  this.ngOnInit();
+}
+
+
+
   public a = 'active';
+  public firstName :any;
+  public lastName :any;
+
+
 
 onRowClicked(event) {
   const url = window.location.href;
@@ -75,12 +86,16 @@ onRowClicked(event) {
 
   ngOnInit() {
     this.gridData(this.a);
-    
+    let userData = JSON.parse(localStorage.getItem('formioAppUser'));
+    this.firstName = userData.data.firstName;
+    this.lastName = userData.data.lastName ?userData.data.lastName:'';
+  }
+  myListing(){
+    this.gridData(`${this.firstName+this.lastName}`);
   }
 
-
   gridData(a){
-    
+    debugger;
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
       .set('content-type', 'application/json');
 
@@ -89,7 +104,8 @@ onRowClicked(event) {
       .subscribe((res) => {
         this.data = [];
         res.forEach(element => {
-          if(a == element.data.listingStatus){
+          let userName = `${element.data.user.data.firstName+element.data.user.data.lastName?element.data.user.data.firstName+element.data.user.data.lastName:''}`;
+          if(a == element.data.listingStatus || a == userName){
            this.data.push({
             "address": element.data.address.formatted_address,
             "listingType": element.data.listingType,
@@ -107,7 +123,6 @@ onRowClicked(event) {
             "lastUpdated": element.data.lastUpdated
           });
         }
-
         return this.data;
         });
         this.rowData = this.data;
