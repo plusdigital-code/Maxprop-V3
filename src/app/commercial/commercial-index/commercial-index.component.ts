@@ -99,7 +99,7 @@ onRowClicked(event) {
             "primaryProperty": element.data.user.data?element.data.user.data.firstName+" "+element.data.user.data.lastName:'',
             "price": element.data.price,
             "id": element._id,
-            "createdTime": element.data.createdTime,
+            "createdTime": element.data.createdTime?element.data.createdTime:element.created,
             "lastUpdated": element.data.lastUpdated
           });
         }

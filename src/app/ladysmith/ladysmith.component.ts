@@ -90,7 +90,7 @@ onRowClicked(event) {
             "code": element.data.mandateMetaData.code,
             "id": element._id,
             "listingStatus": element.data.listingStatus,
-            "createdTime": element.data.createdTime,
+            "createdTime": element.data.createdTime?element.data.createdTime:element.created,
             "lastUpdated": element.data.lastUpdated
           });
         });
