@@ -62,14 +62,25 @@ export class UmhlangaComponent implements OnInit {
     // other options
 }
 public a = 'active';
+public firstName :any;
+public lastName :any;
+
 onRowClicked(event) {
   const url = window.location.href;
   window.open(`/#/residential/${event.data.id}/view`, '_blank');
   }
 
+  myListing(){
+    this.gridData(`${this.firstName+this.lastName}`);
+  }
+
   newListing(){
     this.router.navigate([`/residential/new`]);
   }
+  clearFilters() {
+    this.ngOnInit();
+  }
+
   ngOnInit() {
     this.gridData(this.a);
   }
@@ -82,7 +93,8 @@ this.http
   .subscribe((res) => {
     this.data = [];
     res.forEach(element => {
-    if(a == element.data.listingStatus){
+     let userName = `${element.data.user.data.firstName+element.data.user.data.lastName?element.data.user.data.firstName+element.data.user.data.lastName:''}`;
+          if(a == element.data.listingStatus || a == userName){
       return this.data.push({
         "address": element.data.address.formatted_address,
         "listingType": element.data.listingType,
