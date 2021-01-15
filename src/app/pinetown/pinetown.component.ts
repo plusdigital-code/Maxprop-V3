@@ -95,7 +95,6 @@ onRowClicked(event) {
   }
 
   gridData(a){
-    debugger;
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
       .set('content-type', 'application/json');
 

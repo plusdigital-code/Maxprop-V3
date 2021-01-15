@@ -60,23 +60,39 @@ export class PhoenixComponent implements OnInit {
 
     // other options
 }
+public a = 'active';
+public firstName :any;
+public lastName :any;
 
 onRowClicked(event) {
   const url = window.location.href;
   window.open(`/#/residential/${event.data.id}/view`, '_blank');
   }
 
+  myListing(){
+    this.gridData(`${this.firstName+this.lastName}`);
+  }
+
+  clearFilters() {
+    this.ngOnInit();
+  }
+  ngOnInit() {
+    this.gridData(this.a);
+  }
+
   newListing(){
     this.router.navigate([`/residential/new`]);
   }
-  ngOnInit() {
+  gridData(a) {
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
       .set('content-type', 'application/json');
 
     this.http
       .get<any[]>('https://whitefang-digitaloffice.form.io/residentials1/submission?data.user.data.office._id=5e39ee1ce08984075b11ea78&sort=-created&skip=0&limit=1000', { headers })
-      .subscribe((res) => {
+      .subscribe((res) => {  this.data = [];
         res.forEach(element => {
+        let userName = `${element.data.user.data.firstName+element.data.user.data.lastName?element.data.user.data.firstName+element.data.user.data.lastName:''}`;
+          if(a == element.data.listingStatus || a == userName){
           return this.data.push({
             "address": element.data.address.formatted_address,
             "listingType": element.data.listingType,
@@ -93,6 +109,7 @@ onRowClicked(event) {
             "createdTime": element.data.createdTime?element.data.createdTime:element.created,
             "lastUpdated": element.data.lastUpdated
           });
+        }
         });
         this.rowData = this.data;
       })

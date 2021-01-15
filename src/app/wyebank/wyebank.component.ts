@@ -62,6 +62,8 @@ export class WyebankComponent implements OnInit {
     // other options
 }
 public a = 'active';
+public firstName :any;
+public lastName :any;
 
 onRowClicked(event) {
   const url = window.location.href;
@@ -74,6 +76,14 @@ onRowClicked(event) {
   ngOnInit() {
     this.gridData(this.a);
   }
+  myListing(){
+    this.gridData(`${this.firstName+this.lastName}`);
+  }
+
+  clearFilters() {
+    this.ngOnInit();
+  }
+
   gridData(a) {
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
       .set('content-type', 'application/json');
@@ -84,8 +94,8 @@ onRowClicked(event) {
         this.data = [];
 
         res.forEach(element => {
-          if(a == element.data.listingStatus){
-
+          let userName = `${element.data.user.data.firstName+element.data.user.data.lastName?element.data.user.data.firstName+element.data.user.data.lastName:''}`;
+          if(a == element.data.listingStatus || a == userName){
           return this.data.push({
             "address": element.data.address.formatted_address,
             "listingType": element.data.listingType,

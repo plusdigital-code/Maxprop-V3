@@ -172,7 +172,7 @@ import { TongaatComponent } from './tongaat/tongaat.component';
       },
       {
         path: 'tongaat',
-        component: DurbanComponent
+        component: TongaatComponent
       },
       {
         path: 'wyebank',
@@ -180,15 +180,15 @@ import { TongaatComponent } from './tongaat/tongaat.component';
       },
       {
         path: 'phoenix',
-        component: DurbanComponent
+        component: PhoenixComponent
       },
       {
         path: 'ladysmith',
-        component: DurbanComponent
+        component: LadysmithComponent
       },
       {
         path: 'kokstad',
-        component: DurbanComponent
+        component: KokstadComponent
       },
       {
         path: 'pinetown-letting',
