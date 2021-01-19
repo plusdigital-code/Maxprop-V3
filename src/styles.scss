@@ -6,9 +6,39 @@
 @import "~ag-grid-community/dist/styles/ag-grid.css";
 @import "~ag-grid-community/dist/styles/ag-theme-balham.css";
 
+.cstImage label + div > div {
+    width: 20% !important;
+}
+
+.cstImage label + div > div img {
+    max-height: 200px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    min-height: 200px;
+    margin-bottom: 12px;
+    width: 185px !important;
+}
+
+.cstImage img {
+    width: 150px !important;
+}
 .ag-header.ag-focus-managed.ag-pivot-off {
     background: #000;
 }
+.statistics {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+	justify-content: space-between;}
+
+.statistics h3{
+		margin-top:20px;
+	}
+	.statistics h3:first-child{margin-top:0;}
+	.statistics p{margin-bottom:5px;}
+
+
+
 
 .ag-header.ag-focus-managed.ag-pivot-off span {
     color: #fff;
