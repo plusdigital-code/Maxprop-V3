@@ -35,6 +35,9 @@ import { PinetownLettingComponent } from './pinetown-letting/pinetown-letting.co
 import { LadysmithComponent } from './ladysmith/ladysmith.component';
 import { WyebankComponent } from './wyebank/wyebank.component';
 import { TongaatComponent } from './tongaat/tongaat.component';
+import {CommercialContactsComponent  } from './commercial-contacts/commercial-contacts.component';
+import { ResidentialContactComponent } from './residential-contact/residential-contact.component';
+
 
 // import './components/CheckMatrix';
 
@@ -60,7 +63,9 @@ import { TongaatComponent } from './tongaat/tongaat.component';
 		PinetownLettingComponent,
 		LadysmithComponent,
 		WyebankComponent,
-		TongaatComponent
+    TongaatComponent,
+    CommercialContactsComponent,
+    ResidentialContactComponent
 	],
 	imports: [
 		BrowserAnimationsModule,
@@ -197,7 +202,16 @@ import { TongaatComponent } from './tongaat/tongaat.component';
       {
         path: 'videos',
         component: VideosComponent
+      },
+      {
+        path: 'commercial-contacts',
+        component: CommercialContactsComponent,
+      },
+      {
+        path: 'contacts',
+        component: ResidentialContactComponent,
       }
+      
       
     ],  { useHash: true })
 	],
