@@ -21,13 +21,13 @@ export class CommercialContactsComponent implements OnInit {
   public res: string[] = [];
 
   columnDefs = [
-    { headerName: 'Lead Source',width: 170, field: 'leadSource',filter: 'agTextColumnFilter', },
+    { headerName: 'Lead Source',width: 170, field: 'leadSource',filter: 'agTextColumnFilter', sortable: true },
 
-    { headerName: ' Status ', width: 170 ,field: 'status', filter: 'agTextColumnFilter', },
-    { headerName: 'Full Name',width: 170, field: 'fullName',filter: 'agTextColumnFilter', },
-    { headerName: 'Email', width: 170, field: 'email',filter: 'agTextColumnFilter', },
-    { headerName: 'Mobile', width: 170, field: 'mobile',filter: 'agNumberColumnFilter', },
-    { headerName: 'Message', width: 250, field: 'message',filter: 'agTextColumnFilter', }
+    { headerName: ' Status ', width: 170 ,field: 'status', filter: 'agTextColumnFilter',sortable: true  },
+    { headerName: 'Full Name',width: 170, field: 'fullName',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Email', width: 170, field: 'email',filter: 'agTextColumnFilter',sortable: true  },
+    { headerName: 'Mobile', width: 170, field: 'mobile',filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Message', width: 250, field: 'message',filter: 'agTextColumnFilter',sortable: true  }
   ];
 
   rowData: any;

@@ -23,24 +23,24 @@ export class BereaComponent implements OnInit {
   public res: string[] = [];
 
   columnDefs = [
-    { headerName: 'Status',width: 80, field: 'listingStatus',filter: 'agTextColumnFilter', },
+    { headerName: 'Status',width: 80, field: 'listingStatus',filter: 'agTextColumnFilter', sortable: true},
 
-    { headerName: 'Type', width: 80 ,field: 'listingType', filter: 'agTextColumnFilter', },
+    { headerName: 'Type', width: 80 ,field: 'listingType', filter: 'agTextColumnFilter',sortable: true },
     { headerName: 'Created', width: 100 ,field: 'createdTime', filter: 'agDateColumnFilter', cellRenderer: (data) => {
       return data.value ? (new Date(data.value)).toLocaleDateString() : '';
   }, sortable: true },
   { headerName: 'Updated', width: 100 ,field: 'lastUpdated', filter: 'agDateColumnFilter', cellRenderer: (data) => {
     return data.value ? (new Date(data.value)).toLocaleDateString() : '';
 }, sortable: true },
-    { headerName: 'Primary Property Practitioner',width: 160, field: 'primaryProperty',filter: 'agTextColumnFilter', },
-    { headerName: 'Property Type', width: 120, field: 'propertyType',filter: 'agTextColumnFilter', },
-    { headerName: 'Price', width: 120, field: 'price',filter: 'agNumberColumnFilter', },
-    { headerName: 'Suburb', width: 140, field: 'suburb',filter: 'agTextColumnFilter', },
-    { headerName: 'Address', width: 180, field: 'address',filter: 'agTextColumnFilter', },
-    { headerName: 'No. Of Bedrooms', width: 80, field: 'bedrooms',filter: 'agNumberColumnFilter', },
-    { headerName: 'Unit Number', width: 80, field: 'unitNumber' },
-    { headerName: 'Scheme Name', width: 120, field: 'sectionalSchemeName', filter: 'agTextColumnFilter', },
-    { headerName: 'Code', width: 80, field: 'code',filter: 'agTextColumnFilter', }
+    { headerName: 'Primary Property Practitioner',width: 160, field: 'primaryProperty',filter: 'agTextColumnFilter', sortable: true},
+    { headerName: 'Property Type', width: 120, field: 'propertyType',filter: 'agTextColumnFilter',sortable: true },
+    { headerName: 'Price', width: 120, field: 'price',filter: 'agNumberColumnFilter',sortable: true },
+    { headerName: 'Suburb', width: 140, field: 'suburb',filter: 'agTextColumnFilter', sortable: true},
+    { headerName: 'Address', width: 180, field: 'address',filter: 'agTextColumnFilter',sortable: true },
+    { headerName: 'No. Of Bedrooms', width: 80, field: 'bedrooms',filter: 'agNumberColumnFilter',sortable: true },
+    { headerName: 'Unit Number', width: 80, field: 'unitNumber',sortable: true },
+    { headerName: 'Scheme Name', width: 120, field: 'sectionalSchemeName', filter: 'agTextColumnFilter',sortable: true },
+    { headerName: 'Code', width: 80, field: 'code',filter: 'agTextColumnFilter',sortable: true }
   ];
 
 

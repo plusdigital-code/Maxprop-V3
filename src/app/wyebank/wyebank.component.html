@@ -1,5 +1,6 @@
 <h2 class="residential-index"><i class="fas fa-home"></i> Residential Listings<br />
-  <a style="color: blue; text-decoration: underline;font-size: 14px;" data-toggle="modal" data-target="#basicExampleModal">
+  <a style="color: blue; text-decoration: underline;font-size: 14px;" data-toggle="modal"
+    data-target="#basicExampleModal">
     Learn How to Use the Below Listing Grid
   </a>
 </h2>
@@ -18,7 +19,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/6QflZocFBLA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/6QflZocFBLA" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
       </div>
     </div>
   </div>
@@ -28,6 +31,8 @@
       routerlinkactive="active" ng-reflect-router-link="user-brand">Active</a></li>
   <li class="nav-item"><a _ngcontent-ejg-c4="" class="nav-link" routerlink="edit" routerlinkactive="active"
       ng-reflect-router-link="edit" (click)='gridData("archived")'>Archived</a></li>
+  <li class="nav-item"><a _ngcontent-ejg-c4="" class="nav-link" routerlink="edit" routerlinkactive="active"
+      ng-reflect-router-link="edit" (click)='gridData("pending")'>Pending</a></li>
 
   <li class="nav-item"><a _ngcontent-ejg-c4="" class="nav-link" routerlink="edit" routerlinkactive="active"
       ng-reflect-router-link="edit" (click)='myListing()'>
@@ -36,19 +41,10 @@
       ng-reflect-router-link="edit" (click)='clearFilters()'>
       Reset Filters</a></li>
 </ul>
-<ag-grid-angular
-    #myGrid
-    style="height: 556px;"
-    class="ag-theme-balham"
-    [rowData]="rowData"
-    [columnDefs]="columnDefs"
-    [gridOptions]="gridOptions"
-    [pagination]=true
-    [paginationPageSize]="17"
-    (rowClicked)="onRowClicked($event)"
->
+<ag-grid-angular #myGrid style="height: 556px;" class="ag-theme-balham" [rowData]="rowData" [columnDefs]="columnDefs"
+  [gridOptions]="gridOptions" [pagination]=true [paginationPageSize]="17" (rowClicked)="onRowClicked($event)">
 </ag-grid-angular>
 
-<button class="btn btn-primary pull-left float-left" (click) = "newListing()"><i class="glyphicon glyphicon-plus fa fa-plus"></i> New Listing</button>
+<button class="btn btn-primary pull-left float-left" (click)="newListing()"><i
+    class="glyphicon glyphicon-plus fa fa-plus"></i> New Listing</button>
 <hr class="residential-index-hr" />
-

@@ -17,12 +17,12 @@ export class ResidentialContactComponent implements OnInit {
   public res: string[] = [];
 
   columnDefs = [
-    { headerName: 'Mandate ', width: 270, field: 'mandate', filter: 'agTextColumnFilter', },
+    { headerName: 'Mandate ', width: 270, field: 'mandate', filter: 'agTextColumnFilter',sortable: true  },
 
-    { headerName: ' Lead Source ', width: 200, field: 'leadSource', filter: 'agTextColumnFilter', },
-    { headerName: 'Name', width: 200, field: 'fullName', filter: 'agTextColumnFilter', },
-    { headerName: 'Email', width: 262, field: 'email', filter: 'agTextColumnFilter', },
-    { headerName: 'Mobile', width: 170, field: 'mobile', filter: 'agNumberColumnFilter', },
+    { headerName: ' Lead Source ', width: 200, field: 'leadSource', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Name', width: 200, field: 'fullName', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Email', width: 262, field: 'email', filter: 'agTextColumnFilter',sortable: true  },
+    { headerName: 'Mobile', width: 170, field: 'mobile', filter: 'agNumberColumnFilter',sortable: true  },
   ];
 
   rowData: any;

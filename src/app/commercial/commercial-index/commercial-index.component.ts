@@ -23,25 +23,25 @@ export class CommercialIndexComponent  implements OnInit {
   public res: string[] = [];
 
   columnDefs = [
-    { headerName: 'Status',width: 80, field: 'listingStatus',filter: 'agTextColumnFilter', },
+    { headerName: 'Status',width: 80, field: 'listingStatus',filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Created', width: 100 ,field: 'createdTime', filter: 'agDateColumnFilter', cellRenderer: (data) => {
       return data.value ? (new Date(data.value)).toLocaleDateString() : '';
   }, sortable: true },
   { headerName: 'Updated', width: 100 ,field: 'lastUpdated', filter: 'agDateColumnFilter', cellRenderer: (data) => {
     return data.value ? (new Date(data.value)).toLocaleDateString() : '';
 }, sortable: true },
-    { headerName: 'Type', width: 120, field: 'listingType',filter: 'agTextColumnFilter', },
-    { headerName: 'Mandate Status', width: 120, field: 'mandateStatus',filter: 'agTextColumnFilter', },
-    { headerName: 'Code', width: 120, field: 'code',filter: 'agTextColumnFilter', },
-    { headerName: 'Primary Property Practitioner',width: 120, field: 'primaryProperty',filter: 'agTextColumnFilter', },
-    { headerName: 'Price', width: 120, field: 'price',filter: 'agNumberColumnFilter', },
-    { headerName: 'Address', width: 240, field: 'address',filter: 'agTextColumnFilter', },
-    { headerName: 'Floor Size', width: 120, field: 'floorSize',filter: 'agNumberColumnFilter', },
-    { headerName: 'Office Size', width: 120, field: 'officeSize',filter: 'agNumberColumnFilter', },
-    { headerName: 'Factory/Warehouse Size', width: 120, field: 'factoryWarehouseSize',filter: 'agNumberColumnFilter', },
-    { headerName: 'Retail Size', width: 120, field: 'retailSize',filter: 'agNumberColumnFilter', },
-    { headerName: 'Yard Size', width: 120, field: 'yardSpace',filter: 'agNumberColumnFilter', },
-    { headerName: 'Land Size', width: 120, field: 'landSize',filter: 'agNumberColumnFilter', },
+    { headerName: 'Type', width: 120, field: 'listingType',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Mandate Status', width: 120, field: 'mandateStatus',filter: 'agTextColumnFilter',sortable: true  },
+    { headerName: 'Code', width: 120, field: 'code',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Primary Property Practitioner',width: 120, field: 'primaryProperty',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Price', width: 120, field: 'price',filter: 'agNumberColumnFilter',sortable: true  },
+    { headerName: 'Address', width: 240, field: 'address',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Floor Size', width: 120, field: 'floorSize',filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Office Size', width: 120, field: 'officeSize',filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Factory/Warehouse Size', width: 120, field: 'factoryWarehouseSize',filter: 'agNumberColumnFilter',sortable: true  },
+    { headerName: 'Retail Size', width: 120, field: 'retailSize',filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Yard Size', width: 120, field: 'yardSpace',filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Land Size', width: 120, field: 'landSize',filter: 'agNumberColumnFilter', sortable: true },
   ];
 
 
