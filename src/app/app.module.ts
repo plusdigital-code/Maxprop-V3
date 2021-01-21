@@ -37,6 +37,8 @@ import { WyebankComponent } from './wyebank/wyebank.component';
 import { TongaatComponent } from './tongaat/tongaat.component';
 import {CommercialContactsComponent  } from './commercial-contacts/commercial-contacts.component';
 import { ResidentialContactComponent } from './residential-contact/residential-contact.component';
+import { DatePipe } from '@angular/common';
+
 
 
 // import './components/CheckMatrix';
@@ -218,7 +220,8 @@ import { ResidentialContactComponent } from './residential-contact/residential-c
 	providers: [
 		FormioResources,
 		FormioAuthService,
-		FormManagerService,
+    FormManagerService,
+    DatePipe,
 		{
 			provide: FormManagerConfig, useValue: {
 				tag: 'common'
