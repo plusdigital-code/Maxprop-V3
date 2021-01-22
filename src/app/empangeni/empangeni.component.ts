@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AgGridAngular } from 'ag-grid-angular';
 import { Router } from '@angular/router';
 import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
+import { DatePipe } from '@angular/common';
+
 
 
 import 'ag-grid-enterprise';
@@ -25,12 +27,8 @@ export class EmpangeniComponent implements OnInit {
     { headerName: 'Status',width: 80, field: 'listingStatus',filter: 'agTextColumnFilter',sortable: true},
 
     { headerName: 'Type', width: 80 ,field: 'listingType', filter: 'agTextColumnFilter', sortable: true},
-    { headerName: 'Created', width: 100 ,field: 'createdTime', filter: 'agDateColumnFilter', cellRenderer: (data) => {
-      return data.value ? (new Date(data.value)).toLocaleDateString() : '';
-  }, sortable: true },
-  { headerName: 'Updated', width: 100 ,field: 'lastUpdated', filter: 'agDateColumnFilter', cellRenderer: (data) => {
-    return data.value ? (new Date(data.value)).toLocaleDateString() : '';
-}, sortable: true },
+    { headerName: 'Created', width: 100 ,field: 'createdTime', filter: 'agDateColumnFilter', sortable: true },
+  { headerName: 'Updated', width: 100 ,field: 'lastUpdated', filter: 'agDateColumnFilter', sortable: true },
     { headerName: 'Primary Property Practitioner',width: 160, field: 'primaryProperty',filter: 'agTextColumnFilter',sortable: true },
     { headerName: 'Property Type', width: 120, field: 'propertyType',filter: 'agTextColumnFilter', sortable: true},
     { headerName: 'Price', width: 120, field: 'price',filter: 'agNumberColumnFilter',sortable: true },
@@ -47,7 +45,7 @@ export class EmpangeniComponent implements OnInit {
   rowData: any;
   
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router,public datepipe: DatePipe) {
 
   }
 
@@ -102,8 +100,8 @@ onRowClicked(event) {
             "code": element.data.mandateMetaData.code,
             "id": element._id,
             "listingStatus": element.data.listingStatus,
-            "createdTime": element.data.createdTime?element.data.createdTime:element.created,
-            "lastUpdated": element.data.lastUpdated
+            "createdTime": this.datepipe.transform(element.created, 'dd/MM/yyyy'),
+            "lastUpdated": this.datepipe.transform(element.data.lastUpdated, 'dd/MM/yyyy')
           });
         }
         });

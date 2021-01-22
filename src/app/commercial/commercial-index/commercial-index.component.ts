@@ -56,6 +56,10 @@ export class CommercialIndexComponent implements OnInit {
     { headerName: 'Retail Size', width: 120, field: 'retailSize', filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'Yard Size', width: 120, field: 'yardSpace', filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'Land Size', width: 120, field: 'landSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Seller Name', width: 150, field: 'sellerName',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Seller Mobile', width: 150, field: 'sellerMobile',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Seller Work Number', width: 150, field: 'sellerWorkNumber',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Seller Email', width: 150, field: 'sellerEmail',filter: 'agTextColumnFilter', sortable: true }
   ];
 
 
@@ -105,6 +109,7 @@ export class CommercialIndexComponent implements OnInit {
       .subscribe((res) => {
         this.data = [];
         res.forEach(element => {
+          debugger;
           let userName = `${element.data.user.data.firstName + element.data.user.data.lastName ? element.data.user.data.firstName + element.data.user.data.lastName : ''}`;
           if (a == element.data.listingStatus || a == userName) {
             return this.data.push({
@@ -125,8 +130,12 @@ export class CommercialIndexComponent implements OnInit {
               "primaryProperty": element.data.user.data ? element.data.user.data.firstName + " " + element.data.user.data.lastName : '',
               "price": element.data.price,
               "id": element._id,
-              "createdTime": this.datepipe.transform(element.data.createdTime, 'dd/MM/yyyy'),
-              "lastUpdated": this.datepipe.transform(element.data.lastUpdated, 'dd/MM/yyyy')
+              "createdTime": this.datepipe.transform(element.created, 'dd/MM/yyyy'),
+              "lastUpdated": this.datepipe.transform(element.data.lastUpdated, 'dd/MM/yyyy'),
+              "sellerName": element.data.sellerName?element.data.sellerName:'-',
+              "sellerMobile": element.data.sellerMobile?element.data.sellerMobile:'-',
+              "sellerWorkNumber": element.data.sellerWorkNumber?element.data.sellerWorkNumber:'-',
+              "sellerEmail": element.data.sellerEmail?element.data.sellerEmail:'-',
             });
           }
         });
