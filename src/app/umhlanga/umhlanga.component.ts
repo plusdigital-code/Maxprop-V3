@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AgGridAngular } from 'ag-grid-angular';
 import { Router } from '@angular/router';
 import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
+import { DatePipe } from '@angular/common';
+
 
 
 import 'ag-grid-enterprise';
@@ -23,24 +25,20 @@ export class UmhlangaComponent implements OnInit {
   public res: string[] = [];
 
   columnDefs = [
-    { headerName: 'Status',width: 80, field: 'listingStatus',filter: 'agTextColumnFilter', },
+    { headerName: 'Status',width: 80, field: 'listingStatus',filter: 'agTextColumnFilter', sortable: true },
 
-    { headerName: 'Type', width: 80 ,field: 'listingType', filter: 'agTextColumnFilter', },
-    { headerName: 'Created', width: 100 ,field: 'createdTime', filter: 'agDateColumnFilter', cellRenderer: (data) => {
-      return data.value ? (new Date(data.value)).toLocaleDateString() : '';
-  }, sortable: true },
-  { headerName: 'Updated', width: 100 ,field: 'lastUpdated', filter: 'agDateColumnFilter', cellRenderer: (data) => {
-    return data.value ? (new Date(data.value)).toLocaleDateString() : '';
-}, sortable: true },
-    { headerName: 'Primary Property Practitioner',width: 160, field: 'primaryProperty',filter: 'agTextColumnFilter', },
-    { headerName: 'Property Type', width: 120, field: 'propertyType',filter: 'agTextColumnFilter', },
-    { headerName: 'Price', width: 120, field: 'price',filter: 'agNumberColumnFilter', },
-    { headerName: 'Suburb', width: 140, field: 'suburb',filter: 'agTextColumnFilter', },
-    { headerName: 'Address', width: 180, field: 'address',filter: 'agTextColumnFilter', },
-    { headerName: 'No. Of Bedrooms', width: 80, field: 'bedrooms',filter: 'agNumberColumnFilter', },
-    { headerName: 'Unit Number', width: 80, field: 'unitNumber' },
-    { headerName: 'Scheme Name', width: 120, field: 'sectionalSchemeName', filter: 'agTextColumnFilter', },
-    { headerName: 'Code', width: 80, field: 'code',filter: 'agTextColumnFilter', }
+    { headerName: 'Type', width: 80 ,field: 'listingType', filter: 'agTextColumnFilter',sortable: true  },
+    { headerName: 'Created', width: 100 ,field: 'createdTime', filter: 'agDateColumnFilter', sortable: true },
+  { headerName: 'Updated', width: 100 ,field: 'lastUpdated', filter: 'agDateColumnFilter', sortable: true },
+    { headerName: 'Primary Property Practitioner',width: 160, field: 'primaryProperty',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Property Type', width: 120, field: 'propertyType',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Price', width: 120, field: 'price',filter: 'agNumberColumnFilter',sortable: true  },
+    { headerName: 'Suburb', width: 140, field: 'suburb',filter: 'agTextColumnFilter',sortable: true  },
+    { headerName: 'Address', width: 180, field: 'address',filter: 'agTextColumnFilter',sortable: true  },
+    { headerName: 'No. Of Bedrooms', width: 80, field: 'bedrooms',filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Unit Number', width: 80, field: 'unitNumber' ,sortable: true },
+    { headerName: 'Scheme Name', width: 120, field: 'sectionalSchemeName', filter: 'agTextColumnFilter',sortable: true  },
+    { headerName: 'Code', width: 80, field: 'code',filter: 'agTextColumnFilter',sortable: true }
   ];
 
 
@@ -48,7 +46,7 @@ export class UmhlangaComponent implements OnInit {
   rowData: any;
   
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router,public datepipe: DatePipe) {
 
   }
 
@@ -108,8 +106,8 @@ this.http
         "code": element.data.mandateMetaData.code,
         "id": element._id,
         "listingStatus": element.data.listingStatus,
-        "createdTime": element.data.createdTime,
-        "lastUpdated": element.data.lastUpdated
+        "createdTime": this.datepipe.transform(element.created, 'dd/MM/yyyy'),
+        "lastUpdated": this.datepipe.transform(element.data.lastUpdated, 'dd/MM/yyyy')
       });
     }
     });
