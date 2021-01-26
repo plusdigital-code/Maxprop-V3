@@ -43,7 +43,7 @@
     "lodash": "^4.17.15",
     "ng-formio-grid": "^1.4.2",
     "ngx-sortablejs": "^3.1.4",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.14.1",
     "rxjs": "^6.5.4",
     "sortablejs": "^1.10.2",
     "zone.js": "^0.10.2"
