@@ -81,7 +81,7 @@ onRowClicked(event) {
     .set('content-type', 'application/json');
 
   this.http
-    .get<any[]>('https://whitefang-digitaloffice.form.io/residentials1/submission?data.user.data.office._id=5e398a80544edc46b71e195b&sort=-created&skip=0&limit=1000', { headers })
+    .get<any[]>('https://whitefang-digitaloffice.form.io/residentials1/submission?data.user.data.office._id=60105dec311325d9fe5c0794&sort=-created&skip=0&limit=1000', { headers })
     .subscribe((res) => {
       this.data = [];
       res.forEach(element => {

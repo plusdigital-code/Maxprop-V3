@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-lg font-weight-bold  mxpro-header" >
   <div class="container">
-    <a class="navbar-brand" href="#" ><img class="logo" src="../../assets/maxprop-logo.jpg" /></a>
+    <a class="navbar-brand" href="#" ><img class="logo" src="../../assets/logo.jpg" /></a>
     <ul class="nav navbar-nav mr-auto">
       
       <!--
@@ -8,8 +8,8 @@
         <a class="nav-link" routerLink="form"><i class="fa fa-wpforms"></i> Forms</a>
       </li>
       -->
-      <li class="nav-item" routerLinkActive="home" *ngIf="auth.authenticated">
-        <a class="nav-link" routerLink="home"> Residential Listings</a>
+      <li class="nav-item" routerLinkActive="durban" *ngIf="auth.authenticated">
+        <a class="nav-link" routerLink="durban"> Residential Listings</a>
       </li>
       <li class="nav-item" routerLinkActive="commercial" *ngIf="auth.authenticated">
         <a class="nav-link" routerLink="commercial"> Commercial Listings</a>
