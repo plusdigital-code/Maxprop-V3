@@ -600,3 +600,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	  }
 	}
 }
+
+
+
+
+// css for lighbox gallery popup
+.ekko-lightbox-container{
+	overflow: hidden;
+	.ekko-lightbox-nav-overlay{
+		position: absolute;
+		top: 50%;
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		left: 0;
+		a{
+			font-size: 2rem;
+			text-decoration: none;
+		}
+	}
+
+}
+
+	
