@@ -109,7 +109,6 @@ export class CommercialIndexComponent implements OnInit {
       .subscribe((res) => {
         this.data = [];
         res.forEach(element => {
-          debugger;
           let userName = `${element.data.user.data.firstName + element.data.user.data.lastName ? element.data.user.data.firstName + element.data.user.data.lastName : ''}`;
           if (a == element.data.listingStatus || a == userName) {
             return this.data.push({
