@@ -379,10 +379,27 @@
           </p>
           <small class="text-muted">Download PDF</small>
         </a>
-      
-           
+        <a *ngIf="service.resource?.data?.property24?.p24Link && service.resource?.data?.property24?.p24Link !== '1'" href="{{service.resource?.data?.property24?.p24Link }}" target="_blank"
+        class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Property 24 </h5>
+          <!-- <small class="text-muted"><i class="fa fa-file"></i></small> -->
+        </div>
+        <p class="mb-1">View the link in property 24
+        </p>
+        <!-- <small class="text-muted">Download PDF</small> -->
+      </a>
+      <a *ngIf="service.resource?.data?.privateProperty?.ppLink && service.resource?.data?.privateProperty?.ppLink !== '1'" href="{{service.resource?.data?.privateProperty?.ppLink  }}" target="_blank"
+      class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Private property</h5>
+        <!-- <small class="text-muted"><i class="fa fa-file"></i></small> -->
       </div>
-      
+      <p class="mb-1">View the link in private property
+      </p>
+      <!-- <small class="text-muted">Download PDF</small> -->
+    </a>   
+      </div>
       <div class="card bg-light">
         <div class="card-body text-center p-b-0">
           <div class="profile-pic"><img class="rounded-circle z-depth-1 border" alt="user"

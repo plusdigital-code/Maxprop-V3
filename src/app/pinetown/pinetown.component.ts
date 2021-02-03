@@ -28,8 +28,12 @@ export class PinetownComponent implements OnInit {
   columnDefs = [
     { headerName: 'Status', width: 80, field: 'listingStatus', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Type', width: 80, field: 'listingType', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Created', width: 100, field: 'createdTime', filter: 'agDateColumnFilter', sortable: true },
-    { headerName: 'Updated', width: 100, field: 'lastUpdated', filter: 'agDateColumnFilter', sortable: true },
+    { headerName: 'Created', width: 100, field: 'createdTime', filter: 'agDateColumnFilter', sortable: true,   cellRenderer: (params) => {
+      return  this.datepipe.transform(params.value, 'dd/MM/yyyy');
+    } },
+    { headerName: 'Updated', width: 100, field: 'lastUpdated', filter: 'agDateColumnFilter', sortable: true,   cellRenderer: (params) => {
+      return  this.datepipe.transform(params.value, 'dd/MM/yyyy');
+    } },
     { headerName: 'Primary Property Practitioner', width: 160, field: 'primaryProperty', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Property Type', width: 120, field: 'propertyType', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Price', width: 120, field: 'price', filter: 'agNumberColumnFilter', sortable: true },
@@ -105,6 +109,7 @@ export class PinetownComponent implements OnInit {
         res.forEach(element => {
           let userName = `${element.data.user.data.firstName + element.data.user.data.lastName ? element.data.user.data.firstName + element.data.user.data.lastName : ''}`;
           if (a == element.data.listingStatus || a == userName) {
+            console.log(this.datepipe.transform(element.created, 'dd/MM/yyyy'))
             this.data.push({
               "address": element.data.address.formatted_address,
               "listingType": element.data.listingType,
@@ -118,8 +123,8 @@ export class PinetownComponent implements OnInit {
               "code": element.data.mandateMetaData.code,
               "id": element._id,
               "listingStatus": element.data.listingStatus,
-              "createdTime": this.datepipe.transform(element.created, 'dd/MM/yyyy'),
-              "lastUpdated": this.datepipe.transform(element.data.lastUpdated, 'dd/MM/yyyy')
+              "createdTime": new Date(element.created),
+              "lastUpdated": new Date(element.created)
             });
           }
           return this.data;
