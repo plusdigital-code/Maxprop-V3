@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
+import { InstantiateExpr } from '@angular/compiler';
 
 
 @Component({
@@ -91,10 +92,15 @@ export class CommercialIndexComponent implements OnInit {
     this.router.navigate([`/commercial/new`]);
   }
   myListing() {
-    this.gridData(`${this.firstName + this.lastName}`);
+    let head = this.firstName + this.lastName;
+    if(isNaN(head)){
+      head = 'myListing'
+    }
+    this.gridData(head);
   }
 
   clearFilters() {
+    this.a = 'active';
     this.ngOnInit();
   }
 
@@ -102,6 +108,7 @@ export class CommercialIndexComponent implements OnInit {
     this.gridData(this.a);
   }
   gridData(a) {
+    this.a = a;
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
       .set('content-type', 'application/json');
     this.http

@@ -61,6 +61,7 @@ export class PinetownComponent implements OnInit {
   }
 
   clearFilters() {
+    this.a = 'active';
     this.ngOnInit();
   }
 
@@ -92,6 +93,8 @@ export class PinetownComponent implements OnInit {
   }
 
   gridData(a) {
+    this.a = a;
+
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
       .set('content-type', 'application/json');
 

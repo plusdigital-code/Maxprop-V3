@@ -10,6 +10,8 @@
           <h5>R{{ service.resource?.data.price | number }}
           </h5>
           <p><a href="{{ service.resource?.data.address?.url }}" target="_blank">{{ service.resource?.data.address?.formatted_address }}</a></p>
+          <p *ngIf="service.resource?.data.unitNumber">Unit number - {{service.resource?.data.unitNumber}}</p>
+          <p *ngIf="service.resource?.data?.sectionalSchemeName">Scheme name - {{service.resource?.data?.sectionalSchemeName}} </p>
         </div>
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
@@ -377,6 +379,7 @@
           </p>
           <small class="text-muted">Download PDF</small>
         </a>
+      
            
       </div>
       
