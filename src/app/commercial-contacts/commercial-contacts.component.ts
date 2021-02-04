@@ -106,7 +106,8 @@ onRowClicked(event) {
 
   }
   ngOnInit() {
-    this.gridData(this.a);
+    this.gridData(`${this.email}`);
+    // this.gridData(this.a);
   }
 
 

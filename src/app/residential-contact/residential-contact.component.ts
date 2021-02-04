@@ -66,7 +66,7 @@ export class ResidentialContactComponent implements OnInit {
       .set('content-type', 'application/json');
 
     this.http
-      .get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?sort=-modified&skip=0&limit=1000', { headers })
+      .get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?sort=-modified&skip=0&limit=100', { headers })
       .subscribe((res) => {
         this.data = [];
         res.forEach(element => {
@@ -100,7 +100,7 @@ export class ResidentialContactComponent implements OnInit {
   ngOnInit() {
     let userData = JSON.parse(localStorage.getItem('formioAppUser'));
     this.email = userData.data.email;
-    this.gridData(this.a);
+    this.gridData(this.email);
   }
 
 
