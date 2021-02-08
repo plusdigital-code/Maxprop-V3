@@ -2,14 +2,17 @@
   <div class="row m-t-15">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-body">
+        <div *ngIf="service?.resource" class="card-body">
           <span class="badge badge-primary float-right">{{ service.resource?.data.status }}</span>
           <h5>Contact Information</h5>
-          <p>Related Mandate: <a href="/#/residential/{{ service.resource?.data.residentials1._id }}/view">{{
-              service.resource?.data.residentials1.data.address.formatted_address }} - {{
-              service.resource?.data.residentials1.data.codeDisplay }}</a></p>
+          <p *ngIf="service?.resource">Related Mandate: 
+            <a href="/#/commercial/{{ service?.resource?.data?.commercial1?._id }}/view">
+              {{service.resource?.data?.assignedPractitioner?.data?.office?.data?.address?.formatted_address }} - 
+              {{service.resource?.data?.commercial1?.data.codeDisplay }}
+            </a>
+          </p>
           <ul class="list-group">
-            <li class="list-group-item">
+             <li class="list-group-item">
               <div class="md-v-line"></div><i class="fas fa-user mr-4 pr-3"></i>
               {{ service.resource?.data.fullName }}
             </li>
