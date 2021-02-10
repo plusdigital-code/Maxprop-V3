@@ -66,7 +66,7 @@ export class ResidentialContactComponent implements OnInit {
       .set('content-type', 'application/json');
 
     this.http
-      .get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?sort=-modified&skip=0&limit=100', { headers })
+      .get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?sort=-modified&skip=0&data.email=' + this.email +  '&limit=1000&select=data.residentials1.data.address.formatted_address,data.fullName,data.email,data.mobile,data.message,data.source,_id', { headers })
       .subscribe((res) => {
         this.data = [];
         res.forEach(element => {
@@ -75,7 +75,7 @@ export class ResidentialContactComponent implements OnInit {
               "mandate": element.data.residentials1.data ? element.data.residentials1.data.address.formatted_address : '-',
               "fullName": element.data.fullName,
               "email": element.data.email,
-              "mobile": element.data.mobile,
+              "mobile": element.data.mobile != '' ? element.data.mobile  : '-',
               "message": element.data.message,
               "leadSource": element.data.source,
               "id": element._id,
@@ -86,7 +86,7 @@ export class ResidentialContactComponent implements OnInit {
               "mandate": element.data.residentials1.data ? element.data.residentials1.data.address.formatted_address : '-',
               "fullName": element.data.fullName,
               "email": element.data.email,
-              "mobile": element.data.mobile,
+              "mobile": element.data.mobile != '' ? element.data.mobile  : '-',
               "message": element.data.message,
               "leadSource": element.data.source,
               "id": element._id,
@@ -100,7 +100,8 @@ export class ResidentialContactComponent implements OnInit {
   ngOnInit() {
     let userData = JSON.parse(localStorage.getItem('formioAppUser'));
     this.email = userData.data.email;
-    this.gridData(this.email);
+    this.a = this.email;
+    this.gridData(this.a);
   }
 
 
