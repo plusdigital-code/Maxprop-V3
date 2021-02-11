@@ -5,6 +5,9 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { Router } from '@angular/router';
 import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
 import { ViewChild } from '@angular/core';
+import { type } from 'os';
+
+type TabType = 'all' | 'myListing'
 
 @Component({
   selector: 'app-residential-contact',
@@ -41,10 +44,17 @@ export class ResidentialContactComponent implements OnInit {
 
     // other options
   }
-  public a = '';
+  public tabType:TabType = 'myListing';
   public firstName: any;
   public lastName: any;
   public email: any;
+
+    
+  ngOnInit() {
+    let userData = JSON.parse(localStorage.getItem('formioAppUser'));
+    this.email = userData.data.email;
+    this.gridData();
+  }
 
 
   onRowClicked(event) {
@@ -55,22 +65,33 @@ export class ResidentialContactComponent implements OnInit {
   newListing() {
     this.router.navigate([`/residential/new`]);
   }
+
   allListing() {
-    this.gridData('all');
+    this.tabType = 'all'
+    this.gridData();
   }
+
   myListing() {
-    this.gridData(`${this.email}`);
+    this.tabType = 'myListing'
+    this.gridData();
   }
-  gridData(a) {
+
+  gridData() {  
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
       .set('content-type', 'application/json');
+    
+    let searchFilters = ''
+    if(this.tabType == 'myListing'){
+      searchFilters = '&data.email=' + this.email;
+    }
+    
 
     this.http
-      .get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?sort=-modified&skip=0&data.email=' + this.email +  '&limit=1000&select=data.residentials1.data.address.formatted_address,data.fullName,data.email,data.mobile,data.message,data.source,_id', { headers })
+      .get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?sort=-modified&skip=0' + searchFilters +  '&limit=100&select=data.residentials1.data.address.formatted_address,data.fullName,data.email,data.mobile,data.message,data.source,_id', { headers })
       .subscribe((res) => {
         this.data = [];
         res.forEach(element => {
-          if (a == element.data.email) {
+          if (this.tabType == 'myListing'  && this.email == element.data.email) {
             return this.data.push({
               "mandate": element.data.residentials1.data ? element.data.residentials1.data.address.formatted_address : '-',
               "fullName": element.data.fullName,
@@ -81,7 +102,7 @@ export class ResidentialContactComponent implements OnInit {
               "id": element._id,
             });
           }
-          if (a == 'all') {
+          if (this.tabType == 'all') {
             return this.data.push({
               "mandate": element.data.residentials1.data ? element.data.residentials1.data.address.formatted_address : '-',
               "fullName": element.data.fullName,
@@ -97,14 +118,6 @@ export class ResidentialContactComponent implements OnInit {
       })
 
   }
-  ngOnInit() {
-    let userData = JSON.parse(localStorage.getItem('formioAppUser'));
-    this.email = userData.data.email;
-    this.a = this.email;
-    this.gridData(this.a);
-  }
-
-
 }
 
 
