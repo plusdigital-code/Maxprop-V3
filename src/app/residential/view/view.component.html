@@ -10,6 +10,8 @@
           <h5>R{{ service.resource?.data.price | number }}
           </h5>
           <p><a href="{{ service.resource?.data.address?.url }}" target="_blank">{{ service.resource?.data.address?.formatted_address }}</a></p>
+          <p *ngIf="service.resource?.data.unitNumber">Unit number - {{service.resource?.data.unitNumber}}</p>
+          <p *ngIf="service.resource?.data?.sectionalSchemeName">Scheme name - {{service.resource?.data?.sectionalSchemeName}} </p>
         </div>
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
@@ -328,6 +330,21 @@
                 </div>
               </div>
             </div>
+            <div class="card">
+              <div class="card-header" id="headingSix">
+               
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block collapsed"  type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                    <span class="float-right"><i class="fa fa-chevron-down"></i></span> Map
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseSeven" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                <div class="card-body" style="display: flex; flex-wrap: wrap;">
+                  <div id="map"></div>
+                </div>
+              </div>
+            </div>
             
           </div>
         </div>
@@ -377,9 +394,27 @@
           </p>
           <small class="text-muted">Download PDF</small>
         </a>
-           
+        <a *ngIf="service.resource?.data?.property24?.p24Link && service.resource?.data?.property24?.p24Link !== '1'" href="{{service.resource?.data?.property24?.p24Link }}" target="_blank"
+        class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Property 24 </h5>
+          <!-- <small class="text-muted"><i class="fa fa-file"></i></small> -->
+        </div>
+        <p class="mb-1">View the link in property 24
+        </p>
+        <!-- <small class="text-muted">Download PDF</small> -->
+      </a>
+      <a *ngIf="service.resource?.data?.privateProperty?.ppLink && service.resource?.data?.privateProperty?.ppLink !== '1'" href="{{service.resource?.data?.privateProperty?.ppLink  }}" target="_blank"
+      class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Private property</h5>
+        <!-- <small class="text-muted"><i class="fa fa-file"></i></small> -->
       </div>
-      
+      <p class="mb-1">View the link in private property
+      </p>
+      <!-- <small class="text-muted">Download PDF</small> -->
+    </a>   
+      </div>
       <div class="card bg-light">
         <div class="card-body text-center p-b-0">
           <div class="profile-pic"><img class="rounded-circle z-depth-1 border" alt="user"

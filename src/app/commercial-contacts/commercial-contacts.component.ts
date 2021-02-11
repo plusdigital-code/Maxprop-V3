@@ -74,7 +74,8 @@ onRowClicked(event) {
     .set('content-type', 'application/json');
 
   this.http
-    .get<any[]>('https://whitefang-digitaloffice.form.io/commercialcontact/submission?sort=-modified&skip=0&limit=1000', { headers })
+    .get<any[]>('https://whitefang-digitaloffice.form.io/commercialcontact/submission?sort=-modified&skip=0&data.email=' + this.email +  '&limit=1000&select=data.residentials1.data.address.formatted_address,data.fullName,data.email,data.mobile,data.message,data.source,_id', { headers })
+    // .get<any[]>('https://whitefang-digitaloffice.form.io/commercialcontact/submission?sort=-modified&skip=0&limit=300', { headers })
     .subscribe((res) => {
       this.data = [];
       res.forEach(element => {
@@ -106,7 +107,11 @@ onRowClicked(event) {
 
   }
   ngOnInit() {
-    this.gridData(this.a);
+    let userData = JSON.parse(localStorage.getItem('formioAppUser'));
+    this.email = userData.data.email;
+    this.a = this.email;
+    this.gridData(`${this.email}`);
+    // this.gridData(this.a);
   }
 
 

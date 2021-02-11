@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
+import { InstantiateExpr } from '@angular/compiler';
 
 
 @Component({
@@ -26,20 +27,12 @@ export class CommercialIndexComponent implements OnInit {
 
   columnDefs = [
     { headerName: 'Status', width: 80, field: 'listingStatus', filter: 'agTextColumnFilter', sortable: true },
-    {
-      headerName: 'Created', width: 100, field: 'createdTime', filter: 'agDateColumnFilter',
-      // cellRenderer: (data) => {
-      //   return data.value ? (new Date(data.value)).toLocaleDateString() : '';
-      // },
-      sortable: true
-    },
-    {
-      headerName: 'Updated', width: 100, field: 'lastUpdated', filter: 'agDateColumnFilter',
-      // cellRenderer: (data) => {
-      //   return data.value ? (new Date(data.value)).toLocaleDateString() : '';
-      // },
-      sortable: true
-    },
+    { headerName: 'Created', width: 100, field: 'createdTime', filter: 'agDateColumnFilter', sortable: true,   cellRenderer: (params) => {
+      return  this.datepipe.transform(params.value, 'dd/MM/yyyy');
+    } },
+    { headerName: 'Updated', width: 100, field: 'lastUpdated', filter: 'agDateColumnFilter', sortable: true,   cellRenderer: (params) => {
+      return  this.datepipe.transform(params.value, 'dd/MM/yyyy');
+    } },
     { headerName: 'Listing Type', width: 120, field: 'listingType', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'City', width: 120, field: 'cityRef', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Suburb', width: 120, field: 'suburbRef', filter: 'agTextColumnFilter', sortable: true },
@@ -91,10 +84,15 @@ export class CommercialIndexComponent implements OnInit {
     this.router.navigate([`/commercial/new`]);
   }
   myListing() {
-    this.gridData(`${this.firstName + this.lastName}`);
+    let head = this.firstName + this.lastName;
+    if(isNaN(head)){
+      head = 'myListing'
+    }
+    this.gridData(head);
   }
 
   clearFilters() {
+    this.a = 'active';
     this.ngOnInit();
   }
 
@@ -102,6 +100,7 @@ export class CommercialIndexComponent implements OnInit {
     this.gridData(this.a);
   }
   gridData(a) {
+    this.a = a;
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
       .set('content-type', 'application/json');
     this.http
@@ -129,8 +128,8 @@ export class CommercialIndexComponent implements OnInit {
               "primaryProperty": element.data.user.data ? element.data.user.data.firstName + " " + element.data.user.data.lastName : '',
               "price": element.data.price,
               "id": element._id,
-              "createdTime": this.datepipe.transform(element.created, 'dd/MM/yyyy'),
-              "lastUpdated": this.datepipe.transform(element.data.lastUpdated, 'dd/MM/yyyy'),
+              "createdTime": new Date(element.created),
+              "lastUpdated": new Date(element.created),
               "sellerName": element.data.sellerName?element.data.sellerName:'-',
               "sellerMobile": element.data.sellerMobile?element.data.sellerMobile:'-',
               "sellerWorkNumber": element.data.sellerWorkNumber?element.data.sellerWorkNumber:'-',
