@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
 import { ViewChild } from '@angular/core';
 import { type } from 'os';
+import { Observable } from 'rxjs';
 
 type TabType = 'all' | 'myListing'
 
@@ -16,44 +17,180 @@ type TabType = 'all' | 'myListing'
 })
 export class ResidentialContactComponent implements OnInit {
   @ViewChild('agGrid') agGrid: AgGridAngular;
-  public data = [];
-  public res: string[] = [];
-
   columnDefs = [
-    { headerName: 'Mandate ', width: 270, field: 'mandate', filter: 'agTextColumnFilter',sortable: true  },
-
-    { headerName: ' Lead Source ', width: 200, field: 'leadSource', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Name', width: 200, field: 'fullName', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Email', width: 262, field: 'email', filter: 'agTextColumnFilter',sortable: true  },
-    { headerName: 'Mobile', width: 170, field: 'mobile', filter: 'agNumberColumnFilter',sortable: true  },
+    {
+      headerName: 'Mandate ', width: 270, field: 'mandate', filter: 'agTextColumnFilter',
+      filterParams: {
+        filterOptions: ['equals', 'notEqual', 'contains',],
+        suppressAndOrCondition: true
+      },
+      sortable: true
+    },
+    {
+      headerName: ' Lead Source ', width: 200, field: 'leadSource', filter: 'agTextColumnFilter', filterParams: {
+        filterOptions: ['equals', 'notEqual', 'contains',],
+        suppressAndOrCondition: true
+      }, sortable: true
+    },
+    {
+      headerName: 'Name', width: 200, field: 'fullName', filter: 'agTextColumnFilter', filterParams: {
+        filterOptions: ['equals', 'notEqual', 'contains',],
+        suppressAndOrCondition: true
+      }, sortable: true
+    },
+    {
+      headerName: 'Email', width: 262, field: 'email', filter: 'agTextColumnFilter', filterParams: {
+        filterOptions: ['equals', 'notEqual', 'contains',],
+        suppressAndOrCondition: true
+      }, sortable: true
+    },
+    {
+      headerName: 'Mobile', width: 170, field: 'mobile', filter: 'agNumberColumnFilter', filterParams: {
+        filterOptions: ['equals', 'notEqual', 'contains',],
+        suppressAndOrCondition: true
+      }, sortable: true
+    },
   ];
-
-  rowData: any;
-
+  public rowData: any[];
+  public gridOptions: any;
+  gridParams: any;
+  email;
+  public tabType: TabType = 'myListing';
+  public firstName: any;
+  public lastName: any;
 
   constructor(private http: HttpClient, private router: Router) {
 
   }
 
-  gridOptions: {
-    // enables pagination in the grid
-    pagination: true,
-
-    // sets 10 rows per page (default is 100)
-    paginationPageSize: 17,
-
-    // other options
-  }
-  public tabType:TabType = 'myListing';
-  public firstName: any;
-  public lastName: any;
-  public email: any;
-
-    
   ngOnInit() {
+    this.gridOptions = {
+      rowSelection: 'single',
+      cacheBlockSize: 17,
+      maxBlocksInCache: 5,
+      enableServerSideFilter: true,
+      enableServerSideSorting: true,
+      rowModelType: 'infinite',
+      pagination: true,
+      paginationAutoPageSize: true,
+      animateRows: true
+    };
+
     let userData = JSON.parse(localStorage.getItem('formioAppUser'));
     this.email = userData.data.email;
-    this.gridData();
+  }
+
+
+  getRowData(startRow: number, endRow: number, sort, filter): Observable<any[]> {
+    this.gridParams.api.showLoadingOverlay()
+    let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6').set('content-type', 'application/json');
+    let searchData:any = '';
+    let sortData = '-modified';
+    let selectFields = 'data.residentials1.data.address.formatted_address,data.fullName,data.email,data.mobile,data.message,data.source,_id';
+    let limit = 17;
+    if (sort.length) {
+      let sortField = sort[0].colId;
+      let sortType = sort[0].sort;
+      if (sortField == 'mandate') {
+        sortData = 'data.residentials1.data.address.formatted_address'
+      } else if (sortField == 'leadSource') {
+        sortData = 'data.source'
+      } else if (sortField == 'fullName') {
+        sortData = 'data.fullName'
+      } else if (sortField == 'email') {
+        sortData = 'data.email'
+      } else if (sortField == 'monile') {
+        sortData = 'data.mobile'
+      }
+      if (sortType == 'desc') {
+        sortData = '-' + sortData
+      }
+    } else {
+      sortData = '-modified';
+    }
+    if (Object.keys(filter).length) {
+      for(let key in filter){
+        searchData = searchData.length 
+            ? searchData + ','+ this.getFieldName(key) + this.getFilterTypeAndValue(filter[key].type,filter[key].filter) 
+            : searchData + this.getFieldName(key) + this.getFilterTypeAndValue(filter[key].type,filter[key].filter)
+      }
+    }
+
+    // console.log("searchstring  ",searchData)
+
+    if (this.tabType == 'myListing') {
+      // searchData = searchData + 'data.email=' + this.email
+    }
+
+    let url = 'https://whitefang-digitaloffice.form.io/contact/submission?sort=' + sortData + '&skip=' + startRow + '&limit=' + limit + '&select=' + selectFields + '&' + searchData;
+    return this.http.get<any[]>(url, {headers})
+  }
+
+  getFieldName(name){
+    if (name == 'mandate') {
+      return 'data.residentials1.data.address.formatted_address'
+    } else if (name == 'leadSource') {
+      return 'data.source'
+    } else if (name == 'fullName') {
+      return 'data.fullName'
+    } else if (name == 'email') {
+      return 'data.email'
+    } else if (name == 'monile') {
+      return 'data.mobile'
+    }
+  }
+
+  getFilterTypeAndValue(type,key){
+    if(type == 'equals'){
+      return "=" + key
+    } else if(type == 'notEqual'){
+      return "__ne=" + key
+    } else if (type =="contains"){
+      return "__regex="+ key
+    }
+  }
+
+
+  async onGridReady(params: any) {
+    this.gridParams = params;
+    // let totalRows:any = await this.getTotalRows();
+    var datasource = {
+      getRows: (params: IGetRowsParams) => {
+        this.getRowData(params.startRow, params.endRow, params.sortModel, params.filterModel)
+          .subscribe(data => {
+            let parSedData = [];
+            for (let i = 0; i < data.length; i++) {
+              let element = data[i];
+              parSedData.push({
+                "mandate": element.data.residentials1.data ? element.data.residentials1.data.address.formatted_address : '-',
+                "fullName": element.data.fullName,
+                "email": element.data.email,
+                "mobile": element.data.mobile != '' ? element.data.mobile : '-',
+                "message": element.data.message,
+                "leadSource": element.data.source,
+                "id": element._id,
+              });
+            }
+            this.gridParams.api.hideOverlay();
+            if (!parSedData.length) {
+              this.gridParams.api.showNoRowsOverlay()
+              return params.successCallback([], 0)
+            } else {
+              return params.successCallback(parSedData)
+            }
+          });
+      }
+    };
+    params.api.setDatasource(datasource);
+  }
+
+  getTotalRows() {
+    return new Promise(resolve => {
+      let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6').set('content-type', 'application/json');
+      this.http.get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?skip=0&limit=100000&select=_id', { headers }).subscribe(resp => {
+        resolve(resp.length)
+      })
+    })
   }
 
 
@@ -66,58 +203,16 @@ export class ResidentialContactComponent implements OnInit {
     this.router.navigate([`/residential/new`]);
   }
 
-  allListing() {
-    this.tabType = 'all'
-    this.gridData();
-  }
+  // allListing() {
+  //   this.tabType = 'all'
+  //   this.gridData();
+  // }
 
-  myListing() {
-    this.tabType = 'myListing'
-    this.gridData();
-  }
+  // myListing() {
+  //   this.tabType = 'myListing'
+  //   this.gridData();
+  // }
 
-  gridData() {  
-    let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
-      .set('content-type', 'application/json');
-    
-    let searchFilters = ''
-    if(this.tabType == 'myListing'){
-      searchFilters = '&data.email=' + this.email;
-    }
-    
-
-    this.http
-      .get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?sort=-modified&skip=0' + searchFilters +  '&limit=100&select=data.residentials1.data.address.formatted_address,data.fullName,data.email,data.mobile,data.message,data.source,_id', { headers })
-      .subscribe((res) => {
-        this.data = [];
-        res.forEach(element => {
-          if (this.tabType == 'myListing'  && this.email == element.data.email) {
-            return this.data.push({
-              "mandate": element.data.residentials1.data ? element.data.residentials1.data.address.formatted_address : '-',
-              "fullName": element.data.fullName,
-              "email": element.data.email,
-              "mobile": element.data.mobile != '' ? element.data.mobile  : '-',
-              "message": element.data.message,
-              "leadSource": element.data.source,
-              "id": element._id,
-            });
-          }
-          if (this.tabType == 'all') {
-            return this.data.push({
-              "mandate": element.data.residentials1.data ? element.data.residentials1.data.address.formatted_address : '-',
-              "fullName": element.data.fullName,
-              "email": element.data.email,
-              "mobile": element.data.mobile != '' ? element.data.mobile  : '-',
-              "message": element.data.message,
-              "leadSource": element.data.source,
-              "id": element._id,
-            });
-          }
-        });
-        this.rowData = this.data;
-      })
-
-  }
 }
 
 
