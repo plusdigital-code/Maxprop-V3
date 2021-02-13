@@ -21,17 +21,17 @@ export class CommercialContactsComponent implements OnInit {
   public res: string[] = [];
 
   columnDefs = [
-    { headerName: 'Lead Source',width: 170, field: 'leadSource',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Lead Source', width: 170, field: 'leadSource', filter: 'agTextColumnFilter', sortable: true },
 
-    { headerName: ' Status ', width: 170 ,field: 'status', filter: 'agTextColumnFilter',sortable: true  },
-    { headerName: 'Full Name',width: 170, field: 'fullName',filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Email', width: 170, field: 'email',filter: 'agTextColumnFilter',sortable: true  },
-    { headerName: 'Mobile', width: 170, field: 'mobile',filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Message', width: 250, field: 'message',filter: 'agTextColumnFilter',sortable: true  }
+    { headerName: ' Status ', width: 170, field: 'status', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Full Name', width: 170, field: 'fullName', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Email', width: 170, field: 'email', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Mobile', width: 170, field: 'mobile', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Message', width: 250, field: 'message', filter: 'agTextColumnFilter', sortable: true }
   ];
 
   rowData: any;
-  
+
 
   constructor(private http: HttpClient, private router: Router) {
 
@@ -45,65 +45,52 @@ export class CommercialContactsComponent implements OnInit {
     paginationPageSize: 17,
 
     // other options
-}
-public a = 'active';
-public firstName :any;
-public lastName :any;
-public email :any;
+  }
+  public a = 'active';
+  public firstName: any;
+  public lastName: any;
+  public email: any;
 
-onRowClicked(event) {
-  const url = window.location.href;
-  window.open(`/#/commercial-contact/${event.data.id}/view`, '_blank');
+  onRowClicked(event) {
+    const url = window.location.href;
+    window.open(`/#/commercial-contact/${event.data.id}/view`, '_blank');
   }
 
-  newListing(){
+  newListing() {
     this.router.navigate([`/residential/new`]);
   }
-  allListing(){
+  allListing() {
     this.gridData('all');
   }
-  myListing(){
+  myListing() {
     this.gridData(`${this.email}`);
   }
   clearFilters() {
     this.ngOnInit();
   }
-  
-  gridData(a){
-    let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
-    .set('content-type', 'application/json');
 
-  this.http
-    .get<any[]>('https://whitefang-digitaloffice.form.io/commercialcontact/submission?sort=-modified&skip=0&data.email=' + this.email +  '&limit=1000&select=data.residentials1.data.address.formatted_address,data.fullName,data.email,data.mobile,data.message,data.source,_id', { headers })
-    // .get<any[]>('https://whitefang-digitaloffice.form.io/commercialcontact/submission?sort=-modified&skip=0&limit=300', { headers })
-    .subscribe((res) => {
-      this.data = [];
-      res.forEach(element => {
-        if(a == element.data.email){
-        return this.data.push({
-          "status":element.data.status?element.data.fullName:'-' ,
-          "fullName": element.data.fullName,
-          "email": element.data.email,
-          "mobile": element.data.mobile,
-          "message": element.data.message,
-          "leadSource":element.data.source,
-          "id": element._id,
-        });
-      }
-      if(a == 'all'){
-        return this.data.push({
-          "status":element.data.status?element.data.fullName:'-' ,
-          "fullName": element.data.fullName,
-          "email": element.data.email,
-          "mobile": element.data.mobile,
-          "message": element.data.message,
-          "leadSource":element.data.source,
-          "id": element._id,
-        });
-      }
-      });
-      this.rowData = this.data;
-    })
+  gridData(a) {
+    let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6')
+      .set('content-type', 'application/json');
+
+    this.http
+      .get<any[]>('https://whitefang-digitaloffice.form.io/commercialcontact/submission?sort=-modified&skip=0&data.commercial1.data.user.data.email=' + this.email + '&limit=1000&select=data.commercial1.data.address.formatted_address,data.fullName,data.email,data.mobile,data.message,data.source,_id', { headers })
+      // .get<any[]>('https://whitefang-digitaloffice.form.io/commercialcontact/submission?sort=-modified&skip=0&limit=300', { headers })
+      .subscribe((res) => {
+        this.data = [];
+        res.forEach(element => {
+          return this.data.push({
+            "status": element.data.status ? element.data.fullName : '-',
+            "fullName": element.data.fullName,
+            "email": element.data.email,
+            "mobile": element.data.mobile,
+            "message": element.data.message,
+            "leadSource": element.data.source,
+            "id": element._id,
+          });
+        })
+        this.rowData = this.data;
+      })
 
   }
   ngOnInit() {

@@ -119,7 +119,7 @@ export class ResidentialContactComponent implements OnInit {
     // console.log("searchstring  ",searchData)
 
     if (this.tabType == 'myListing') {
-      searchData = searchData + 'data.email=' + this.email
+      searchData = searchData + 'data.residentials1.data.user.data.email=' + this.email
     }
 
     let url = 'https://whitefang-digitaloffice.form.io/contact/submission?sort=' + sortData + '&skip=' + startRow + '&limit=' + limit + '&select=' + selectFields + '&' + searchData;
@@ -153,7 +153,7 @@ export class ResidentialContactComponent implements OnInit {
 
   async onGridReady(params: any) {
     this.gridParams = params;
-    // let totalRows:any = await this.getTotalRows();
+    let totalRows:any = await this.getTotalRows();
     var datasource = {
       getRows: (params: IGetRowsParams) => {
         this.getRowData(params.startRow, params.endRow, params.sortModel, params.filterModel)
@@ -176,7 +176,7 @@ export class ResidentialContactComponent implements OnInit {
               this.gridParams.api.showNoRowsOverlay()
               return params.successCallback([], 0)
             } else {
-              return params.successCallback(parSedData)
+              return params.successCallback(parSedData, totalRows)
             }
           });
       }
@@ -185,9 +185,12 @@ export class ResidentialContactComponent implements OnInit {
   }
 
   getTotalRows() {
+    if (this.tabType == 'myListing') {
+      var searchData = 'data.residentials1.data.user.data.email=' + this.email
+    }
     return new Promise(resolve => {
       let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6').set('content-type', 'application/json');
-      this.http.get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?skip=0&limit=100000&select=_id', { headers }).subscribe(resp => {
+      this.http.get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?skip=0&limit=100000&select=_id&'+searchData, { headers }).subscribe(resp => {
         resolve(resp.length)
       })
     })
