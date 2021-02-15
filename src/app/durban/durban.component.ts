@@ -37,7 +37,6 @@ export class DurbanComponent implements OnInit {
     { headerName: 'Primary Property Practitioner',width: 160, field: 'primaryProperty',filter: 'agTextColumnFilter',sortable: true  },
     { headerName: 'Property Type', width: 120, field: 'propertyType',filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Price', width: 120, field: 'price',filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Suburb', width: 140, field: 'suburb',filter: 'agTextColumnFilter',sortable: true  },
     { headerName: 'Address', width: 180, field: 'address',filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'No. Of Bedrooms', width: 80, field: 'bedrooms',filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'Unit Number', width: 80, field: 'unitNumber' ,sortable: true },
@@ -85,7 +84,7 @@ onRowClicked(event) {
     .set('content-type', 'application/json');
 
   this.http
-    .get<any[]>('https://whitefang-digitaloffice.form.io/residentials1/submission?data.user.data.office._id=5e398a80544edc46b71e195b&sort=-created&skip=0&limit=1000', { headers })
+    .get<any[]>('https://whitefang-digitaloffice.form.io/residentials1/submission?data.user.data.office._id=60105dec311325c21d5c0799&sort=-created&skip=0&limit=1000', { headers })
     .subscribe((res) => {
       this.data = [];
       res.forEach(element => {
@@ -97,7 +96,6 @@ onRowClicked(event) {
           "propertyType": element.data.propertyType.data.label,
           "primaryProperty": element.data.user.data?element.data.user.data.firstName+" "+element.data.user.data.lastName:'',
           "price": element.data.price,
-          "suburb": element.data.suburbRef.data.suburb,
           "bedrooms": element.data.bedrooms,
           "unitNumber": element.data.unitNumber ? element.data.unitNumber : '',
           "sectionalSchemeName": element.data.sectionalSchemeName,

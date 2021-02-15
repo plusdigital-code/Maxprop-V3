@@ -38,6 +38,7 @@ import { TongaatComponent } from './tongaat/tongaat.component';
 import {CommercialContactsComponent  } from './commercial-contacts/commercial-contacts.component';
 import { ResidentialContactComponent } from './residential-contact/residential-contact.component';
 import { DatePipe } from '@angular/common';
+import { MaxpropDigitalComponent } from './maxprop-digital/maxprop-digital.component';
 
 
 
@@ -67,7 +68,8 @@ import { DatePipe } from '@angular/common';
 		WyebankComponent,
     TongaatComponent,
     CommercialContactsComponent,
-    ResidentialContactComponent
+    ResidentialContactComponent,
+    MaxpropDigitalComponent
 	],
 	imports: [
 		BrowserAnimationsModule,
@@ -156,6 +158,10 @@ import { DatePipe } from '@angular/common';
       {
         path: 'berea',
         component: BereaComponent
+      },
+      {
+        path: 'maxprop-digital',
+        component: MaxpropDigitalComponent
       },
       {
         path: 'umhlanga',
