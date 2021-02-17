@@ -116,10 +116,10 @@ export class ResidentialContactComponent implements OnInit {
       }
     }
 
-    // console.log("searchstring  ",searchData)
+    //console.log("searchstring  ",searchData)
 
     if (this.tabType == 'myListing') {
-      searchData = searchData + 'data.residentials1.data.user.data.email=' + this.email
+      searchData = searchData + '&data.residentials1.data.user.data.email=' + this.email
     }
 
     let url = 'https://whitefang-digitaloffice.form.io/contact/submission?sort=' + sortData + '&skip=' + startRow + '&limit=' + limit + '&select=' + selectFields + '&' + searchData;
