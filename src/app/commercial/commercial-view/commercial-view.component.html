@@ -682,6 +682,43 @@
         </div>
        
       </div>
+
+        <!-- seller div -->
+        <div class="card bg-light cView-mt-30  profileCard">
+          <div class="card-body p-b-0">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Seller Info</h5>
+            </div>
+            <p class="">
+              {{ service.resource?.data.sellerName }}
+            </p>
+            <p class="">
+              {{ service.resource?.data.sellerEmail }}
+            </p>
+            <p class="">
+              {{ service.resource?.data.sellerMobile }}
+            </p>
+          </div>
+        </div>
+
+
+        <!-- tenant div -->
+        <div *ngIf="service.resource?.data.tennantContact != '' && service.resource?.data.tennantMobile != '' && service.resource?.data.tennantEmail != '' " class="card bg-light cView-mt-30  profileCard">
+          <div class="card-body p-b-0">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Tenant Info</h5>
+            </div>
+            <p class="">
+              {{ service.resource?.data.tennantContact }}
+            </p>
+            <p class="">
+              {{ service.resource?.data.tennantMobile }}
+            </p>
+            <p class="">
+              {{ service.resource?.data.tennantEmail }}
+            </p>
+          </div>
+        </div>
    
     </div>
   </div>
