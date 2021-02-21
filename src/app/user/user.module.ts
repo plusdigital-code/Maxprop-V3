@@ -17,6 +17,7 @@ import { UserResetPasswordComponent } from './user-reset/user-reset-password.com
 import { UserResourceComponent } from './user-resource/user-resource.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditComponent } from './user-edit/user-edit.component';
+
 @NgModule({
   declarations: [UserResourceComponent,EditComponent, UserViewComponent, UserResetPasswordComponent],
   imports: [
@@ -56,7 +57,7 @@ import { EditComponent } from './user-edit/user-edit.component';
           },
           {
             path: 'edit',
-            component: EditComponent
+            component: FormioResourceEditComponent
           },
           {
             path: 'delete',
@@ -65,10 +66,6 @@ import { EditComponent } from './user-edit/user-edit.component';
           {
             path: 'user-notes',
             loadChildren: './user-notes/user-notes.module#UserNotesModule'
-          },
-          {
-            path: 'user-brand',
-            loadChildren: './user-brand/user-brand.module#UserBrandModule'
           }
           
         ]

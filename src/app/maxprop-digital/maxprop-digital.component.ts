@@ -37,6 +37,7 @@ export class MaxpropDigitalComponent implements OnInit {
     { headerName: 'Primary Property Practitioner',width: 160, field: 'primaryProperty',filter: 'agTextColumnFilter',sortable: true  },
     { headerName: 'Property Type', width: 120, field: 'propertyType',filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Price', width: 120, field: 'price',filter: 'agNumberColumnFilter', sortable: true },
+    
     { headerName: 'Address', width: 180, field: 'address',filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'No. Of Bedrooms', width: 80, field: 'bedrooms',filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'Unit Number', width: 80, field: 'unitNumber' ,sortable: true },
