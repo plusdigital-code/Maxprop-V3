@@ -22,8 +22,8 @@ export class EditComponent extends FormioResourceEditComponent {
         });
         $('div.formio-component-images').on("drop", function (e) {
             imageList = [];
-            $('div.formio-component-images img').each(function () {
-                imageList.push($(this).prop('alt'));
+            $('div.formio-component-images img').each(function (e) {
+                imageList.push({src: this.src, alt:$(this).prop('alt')})
             });
         })
         var divElement = document.getElementById('sortOrder');
@@ -56,7 +56,7 @@ export class EditComponent extends FormioResourceEditComponent {
         let sortImagedata = [];
         if (imageList && imageList.length > 0) {
             imageList.map(x => {
-                var image = this.service.resource.data.images.find(o => o.originalName === x);
+                var image = this.service.resource.data.images.find(o => o.url === x.src);
                 sortImagedata.push(image);
             })
         }

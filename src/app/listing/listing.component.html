@@ -1,0 +1,63 @@
+<h2 class="residential-index"><i class="fas fa-home"></i> Residential Listings<br />
+  <a style="color: blue; text-decoration: underline;font-size: 14px;" data-toggle="modal"
+    data-target="#basicExampleModal">
+    Learn How to Use the Below Listing Grid
+  </a>
+</h2>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">How to Use the Maxprop Digital Listing Grid</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/6QflZocFBLA" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul class="nav nav-tabs resource-list">
+
+  <li class="nav-item">
+    <a (click)='handleTabClick("active")' [ngClass]="{'selectedTab': activeTab === 'active'}" class="nav-link"
+      routerlink="user-brand" routerlinkactive="active" ng-reflect-router-link="user-brand">Active </a>
+  </li>
+  <li class="nav-item"><a [ngClass]="{'selectedTab': activeTab === 'archived'}" class="nav-link" routerlink="edit"
+      routerlinkactive="active" ng-reflect-router-link="edit" (click)='handleTabClick("archived")'>Archived</a></li>
+  <li class="nav-item"><a [ngClass]="{'selectedTab': activeTab === 'pending'}" class="nav-link" routerlink="edit"
+      routerlinkactive="active" ng-reflect-router-link="edit" (click)='handleTabClick("pending")'>Pending</a></li>
+
+  <li class="nav-item"><a [ngClass]="{'selectedTab': activeTab === 'myListing'}" class="nav-link" routerlink="edit"
+      routerlinkactive="active" ng-reflect-router-link="edit" (click)='handleTabClick("myListing")'>
+      My Listing</a></li>
+  <li class="nav-item">
+    <!-- <i (click)='clearFilters()' class="fas fa-filter"></i> -->
+    <a class="nav-link" routerlink="edit" routerlinkactive="active" ng-reflect-router-link="edit"
+      (click)='clearFilters()'>
+      Reset Filters</a>
+    </li>
+</ul>
+
+<!-- <ag-grid-angular #myGrid style="height: 556px;" class="ag-theme-balham" [rowData]="rowData" [columnDefs]="columnDefs"
+  [gridOptions]="gridOptions" [pagination]=true [paginationPageSize]="17" (rowClicked)="onRowClicked($event)">
+</ag-grid-angular> -->
+<div *ngIf="!isGridReady" style="height:556px;"></div>
+<div *ngIf="isGridReady" style="height:556px;">
+  <ag-grid-angular  #myGrid style="width: 100%; height: 100%" class="ag-theme-balham" [gridOptions]="gridOptions"
+  [columnDefs]="columnDefs" (gridReady)="onGridReady($event)" (rowClicked)="onRowClicked($event)"></ag-grid-angular>
+</div>
+
+<button class="btn btn-primary pull-left float-left" (click)="newListing()"><i
+    class="glyphicon glyphicon-plus fa fa-plus"></i> New Listing</button>
+<hr class="residential-index-hr" />

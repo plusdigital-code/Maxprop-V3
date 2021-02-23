@@ -17,69 +17,43 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
-import { HeroComponent } from './hero/hero.component';
 import { AutocompleteComponent } from './autocomplete.component';
 import { BrandComponent } from './brand/brand.component';
 import { VideosComponent } from './videos/videos.component';
 import { FooterComponent } from './footer/footer.component';
-import { PinetownComponent } from './pinetown/pinetown.component';
-import { DurbanComponent } from './durban/durban.component';
-import { BereaComponent } from './berea/berea.component';
-import { EmpangeniComponent } from './empangeni/empangeni.component';
-import { RichardsBayComponent } from './richards-bay/richards-bay.component';
-import { KokstadComponent } from './kokstad/kokstad.component';
-import { HillcrestComponent } from './hillcrest/hillcrest.component';
-import { UmhlangaComponent } from './umhlanga/umhlanga.component';
-import { PhoenixComponent } from './phoenix/phoenix.component';
-import { PinetownLettingComponent } from './pinetown-letting/pinetown-letting.component';
-import { LadysmithComponent } from './ladysmith/ladysmith.component';
-import { WyebankComponent } from './wyebank/wyebank.component';
-import { TongaatComponent } from './tongaat/tongaat.component';
-import {CommercialContactsComponent  } from './commercial-contacts/commercial-contacts.component';
+import { CommercialContactsComponent } from './commercial-contacts/commercial-contacts.component';
 import { ResidentialContactComponent } from './residential-contact/residential-contact.component';
 import { DatePipe } from '@angular/common';
+import { ListingComponent } from './listing/listing.component';
 
 
 
 // import './components/CheckMatrix';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		HomeComponent,
-		HeaderComponent,
-		HeroComponent,
-		AutocompleteComponent,
-		BrandComponent,
-		VideosComponent,
-		FooterComponent,
-		PinetownComponent,
-		DurbanComponent,
-		BereaComponent,
-		EmpangeniComponent,
-		RichardsBayComponent,
-		KokstadComponent,
-		HillcrestComponent,
-		UmhlangaComponent,
-		PhoenixComponent,
-		PinetownLettingComponent,
-		LadysmithComponent,
-		WyebankComponent,
-    TongaatComponent,
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    HeaderComponent,
+    AutocompleteComponent,
+    BrandComponent,
+    VideosComponent,
+    FooterComponent,
     CommercialContactsComponent,
-    ResidentialContactComponent
-	],
-	imports: [
-		BrowserAnimationsModule,
-		MatInputModule,
+    ResidentialContactComponent,
+    ListingComponent
+  ],
+  imports: [
+    BrowserAnimationsModule,
+    MatInputModule,
     MatAutocompleteModule,
     FormioGrid,
-		BrowserModule,
+    BrowserModule,
     FormioModule,
     HttpClientModule,
     AgGridModule.withComponents([]),
-		NgAisModule.forRoot(),
-	  RouterModule.forRoot([
+    NgAisModule.forRoot(),
+    RouterModule.forRoot([
       {
         path: '',
         redirectTo: '/home',
@@ -150,58 +124,6 @@ import { DatePipe } from '@angular/common';
         component: BrandComponent
       },
       {
-        path: 'pinetown',
-        component: PinetownComponent
-      },
-      {
-        path: 'berea',
-        component: BereaComponent
-      },
-      {
-        path: 'umhlanga',
-        component: UmhlangaComponent
-      },
-      {
-        path: 'hillcrest',
-        component: HillcrestComponent
-      },
-      {
-        path: 'richards-bay',
-        component: RichardsBayComponent
-      },
-      {
-        path: 'empangeni',
-        component: EmpangeniComponent
-      },
-      {
-        path: 'durban',
-        component: DurbanComponent
-      },
-      {
-        path: 'tongaat',
-        component: TongaatComponent
-      },
-      {
-        path: 'wyebank',
-        component: WyebankComponent
-      },
-      {
-        path: 'phoenix',
-        component: PhoenixComponent
-      },
-      {
-        path: 'ladysmith',
-        component: LadysmithComponent
-      },
-      {
-        path: 'kokstad',
-        component: KokstadComponent
-      },
-      {
-        path: 'pinetown-letting',
-        component: PinetownLettingComponent
-      },
-      {
         path: 'videos',
         component: VideosComponent
       },
@@ -212,29 +134,35 @@ import { DatePipe } from '@angular/common';
       {
         path: 'contacts',
         component: ResidentialContactComponent,
+      },
+      {
+        path: 'residentialoffice/:officeId',
+        component: ListingComponent,
+      },
+      {
+        path: 'suburb',
+        loadChildren: './suburb/suburb.module#SuburbModule'
       }
-      
-      
-    ],  { useHash: true })
-	],
-	providers: [
-		FormioResources,
-		FormioAuthService,
+    ], { useHash: true })
+  ],
+  providers: [
+    FormioResources,
+    FormioAuthService,
     FormManagerService,
     DatePipe,
-		{
-			provide: FormManagerConfig, useValue: {
-				tag: 'common'
-			}
-		},
-		{ provide: FormioAuthConfig, useValue: AuthConfig },
-		{ provide: FormioAppConfig, useValue: AppConfig }
-	],
-	bootstrap: [AppComponent]
+    {
+      provide: FormManagerConfig, useValue: {
+        tag: 'common'
+      }
+    },
+    { provide: FormioAuthConfig, useValue: AuthConfig },
+    { provide: FormioAppConfig, useValue: AppConfig }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
-	constructor(public _router: Router) {
+  constructor(public _router: Router) {
 
-	}
+  }
 
 }

@@ -19,7 +19,7 @@ export class ViewComponent extends FormioResourceViewComponent {
       const pointer = this.service.resource.data.address.geometry.location;
       const map = new google.maps.Map(document.getElementById("map"), {
         center: pointer,
-        zoom: 10,
+        zoom: 15,
       });
       const marker = new google.maps.Marker({
         position: pointer,
