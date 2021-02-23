@@ -138,6 +138,10 @@ import { ListingComponent } from './listing/listing.component';
       {
         path: 'residentialoffice/:officeId',
         component: ListingComponent,
+      },
+      {
+        path: 'suburb',
+        loadChildren: './suburb/suburb.module#SuburbModule'
       }
     ], { useHash: true })
   ],
