@@ -7,7 +7,7 @@
           <h5>Contact Information</h5>
           <p *ngIf="service?.resource">Related Mandate: 
             <a href="/#/commercial/{{ service?.resource?.data?.commercial1?._id }}/view">
-              {{service.resource?.data?.commercial1?.data?.address?.formatted_address }} - 
+              {{service.resource?.data?.commercial1?.address?.formatted_address }} - 
               {{service.resource?.data?.commercial1?.data.codeDisplay }}
             </a>
           </p>
