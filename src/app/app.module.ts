@@ -142,6 +142,10 @@ import { ListingComponent } from './listing/listing.component';
       {
         path: 'suburb',
         loadChildren: './suburb/suburb.module#SuburbModule'
+      },
+      {
+        path: 'city',
+        loadChildren: './city-list/city-list.module#CityListModule'
       }
     ], { useHash: true })
   ],
