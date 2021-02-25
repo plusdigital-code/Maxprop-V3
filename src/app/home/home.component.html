@@ -12,15 +12,92 @@
     <h4><a href="/#/auth/login">Login</a> to Start Working</h4>
   </div>
 </div>
-<div class="row" style="margin-top:15spx;margin-bottom:60px;">
-  <div class="col-md-12">
-    <h4>Select Your Office</h4>
-    <ul class="list-group">
-      <li *ngFor="let office of officeList" class="list-group-item">
-        <a routerLink="/residentialoffice/{{office.id}}">
-          {{office.office}}
-        </a>
-      </li>
-    </ul>
+<div class="row">
+  <div class="col-md-4">
+    <!-- Card -->
+    <div class="card card-image"
+      style="background-image: url(https://properties-digital-office.s3-us-west-2.amazonaws.com/assets/residential.jpg);">
+
+      <!-- Content -->
+      <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+        <div>
+          <h5 style="color: #3ffbff;"><i class="fas fa-home" style="color: #3ffbff;margin-right:5px;"></i>Residential Listings</h5>
+          <h3 class="card-title pt-2"><strong>Manage Your Residential Listings</strong></h3>
+          <p>Capture listing details, add notes & files, schedule viewings and add leads.</p>
+          <a class="btn" routerLink="/residentialoffice/60105dec311325c21d5c0799" style="background-color: #3ffbff;color: #000000;font-weight: 700;"> View Listings</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Card -->
+  </div>
+  <div class="col-md-4">
+    <div class="card card-image"
+      style="background-image: url(https://properties-digital-office.s3-us-west-2.amazonaws.com/assets/etienne-beauregard-riverin-B0aCvAVSX8E-unsplash.jpg);">
+
+      <!-- Content -->
+      <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+        <div>
+          <h5 style="color: #3ffbff;"><i class="fas fa-building" style="color: #3ffbff;margin-right:5px;"></i>Commercial Listings</h5>
+          <h3 class="card-title pt-2"><strong>Manage Your Commercial Listings</strong></h3>
+          <p>Capture listing details, add notes & files, schedule viewings and add leads.</p>
+          <a class="btn" routerLink="/commercial" 
+            style="background-color: #3ffbff;color: #000000;font-weight: 700;">View Listings</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card card-image"
+      style="background-image: url(https://properties-digital-office.s3-us-west-2.amazonaws.com/assets/adam-solomon-WHUDOzd5IYU-unsplash.jpg);">
+
+      <!-- Content -->
+      <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+        <div>
+          <h5 style="color: #3ffbff;"><i class="fas fa-headset" style="color: #3ffbff;margin-right:5px;"></i>Help & Support</h5>
+          <h3 class="card-title pt-2"><strong>Get Prompt Assistance From Our Support Team</strong></h3>
+          <p>Become a pro in no time with our easy-to-follow guides on how to use the digital office.</p>
+          <a class="btn" routerLink="/support" 
+            style="background-color: #3ffbff;color: #000000;font-weight: 700;">View Options</a>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
+<!--
+<div class="row">
+  <div class="col-md-4"><a routerLink="/residentialoffice/60105dec311325c21d5c0799">
+      <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+        <img src="assets/Residential-2.png" style="max-width:75px;margin: 0 auto; margin-top:15px;" />
+        <div class="card-body">
+          <h4 class="card-title text-center font-weight-bold">Residential</h4>
+          <p class="card-text text-center">Manage your residential listings</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-md-4"><a routerLink="/commercial">
+      <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+        <img src="assets/Commercial.png" style="max-width:75px;margin: 0 auto; margin-top:15px;" />
+        <div class="card-body">
+          <h4 class="card-title text-center font-weight-bold">Commercial</h4>
+          <p class="card-text text-center">Manage your commercial listings</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-md-4"><a routerLink="/support">
+    <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+      <img src="assets/Support.png" style="max-width:75px;margin: 0 auto; margin-top:15px;" />
+      <div class="card-body">
+        <h4 class="card-title text-center font-weight-bold">Get Help</h4>
+        <p class="card-text text-center">Support tickets and guides</p>
+      </div>
+    </div>
+  </a>
+</div>
+</div>
+-->

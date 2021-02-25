@@ -129,7 +129,7 @@ $fa-font-path: '../node_modules/font-awesome/fonts';
 // header css 
 
 .mxpro-header{
-    background-color: #FFF200;
+    background-color: #000000;
     .navbar-brand{
 		font-size: 1.75rem;
         img {
@@ -287,7 +287,7 @@ $fa-font-path: '../node_modules/font-awesome/fonts';
 }
 
 .nav-link{
-  color: #000000;
+	color: #ffffff;
 }
 
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
@@ -302,7 +302,7 @@ $fa-font-path: '../node_modules/font-awesome/fonts';
 }
 .nav-link:hover
 {
-	color:#000000 !important;
+	color:#ffffff !important;
 	text-decoration: underline;
 }
 .nav-tabs .nav-link {
@@ -320,14 +320,14 @@ $fa-font-path: '../node_modules/font-awesome/fonts';
 }
 
 .btn-primary {
-    background-color: #FFF200 !important;
+	background-color: #3ffbff !important;
     border-color: #000 !important;
     color: #000000 !important;
     border-radius: 5px;
 }
 
 .pd-colour{
-  background-color: #FFF200;
+	background-color: #3ffbff !important;
   color: #000000;
   padding: 5px;
 }
