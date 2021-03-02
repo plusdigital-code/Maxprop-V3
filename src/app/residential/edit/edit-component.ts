@@ -65,8 +65,8 @@ export class EditComponent extends FormioResourceEditComponent {
             imageList.map(x => {
                 var image = "";
                 if (x.alt == true) {
+                    image = this.service.resource.data.images.find(o => o.originalName === x.src);
                     if (image) {
-                        image = this.service.resource.data.images.find(o => o.originalName === x.src);
                         sortImagedata.push(image);
                     }
                 }
