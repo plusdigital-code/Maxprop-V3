@@ -23,7 +23,14 @@ export class EditComponent extends FormioResourceEditComponent {
         $('div.formio-component-images').on("drop", function (e) {
             imageList = [];
             $('div.formio-component-images img').each(function (e) {
-                imageList.push({src: this.src, alt:$(this).prop('alt')})
+                const index = this.src.indexOf("?");
+                if (index > 0) {
+                    const srcImage = this.src.substring(0, index).replace("https://properties-digital-office.s3.us-west-2.amazonaws.com/properties/", " ");
+                    imageList.push({ src: srcImage, alt: false });
+                }
+                else {
+                    imageList.push({ src: $(this).prop('alt'), alt: true });
+                }
             });
         })
         var divElement = document.getElementById('sortOrder');
@@ -56,8 +63,19 @@ export class EditComponent extends FormioResourceEditComponent {
         let sortImagedata = [];
         if (imageList && imageList.length > 0) {
             imageList.map(x => {
-                var image = this.service.resource.data.images.find(o => o.url === x.src);
-                sortImagedata.push(image);
+                var image = "";
+                if (x.alt == true) {
+                    if (image) {
+                        image = this.service.resource.data.images.find(o => o.originalName === x.src);
+                        sortImagedata.push(image);
+                    }
+                }
+                else {
+                    image = this.service.resource.data.images.find(o => o.name.trim() === x.src.trim());
+                    if (image) {
+                        sortImagedata.push(image);
+                    }
+                }
             })
         }
         if (sortImagedata && sortImagedata.length > 0) {
