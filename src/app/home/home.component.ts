@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     { id: '5e398a86544edc3b6a1e1971', office: 'Maxprop Tongaat', link: '/tongaat', icon: '' },
     { id: '5e398ba9871f8e9b4191bff9', office: 'Maxprop Kokstad', link: '/kokstad', icon: '' },
     { id: '5e398ba7a4901461be9c5df2', office: 'Maxprop Wyebank', link: '/wyebank', icon: '' },
+    { id: '60105dec311325c21d5c0799', office: 'Maxprop Digital', link: '/maxprop-digital', icon: '' }
   ]
 
   ngOnInit() {
