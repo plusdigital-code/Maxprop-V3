@@ -352,7 +352,7 @@
     </div>
     <div class="col-md-4">
       <div class="list-group">
-        <a href="https://maxprop.digital/residential/{{service.resource?.data.codeDisplay}}" target="_blank"
+        <a href="https://maxprop.digital/residential/{{service.resource?.data.codeDisplay | lowercase }}" target="_blank"
           class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">Website Page</h5>
@@ -362,7 +362,7 @@
           </p>
           <small>Open in new tab</small>
         </a>
-        <a href="https://www.maxprop.digital/residential-landing-page/{{service.resource?.data.codeDisplay}}"
+        <a href="https://www.maxprop.digital/residential-landing-page/{{service.resource?.data.codeDisplay | lowercase }}"
           target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">Landing Page</h5>
