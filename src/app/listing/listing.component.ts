@@ -82,7 +82,7 @@ export class ListingComponent implements OnInit {
       }
       else {
         ele.filterParams = {
-          filterOptions: ['equals', 'notEqual', 'contains',],
+          filterOptions: ['contains', 'notEqual','equals' ,],
           suppressAndOrCondition: true
         }
       }
