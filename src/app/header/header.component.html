@@ -54,6 +54,20 @@
     <ul class="nav navbar-nav ml-auto">
       <li class="nav-item dropdown" *ngIf="auth.authenticated">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Support
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <!--
+          <a href="https://opencampus.virbela.com/register?redirect=download" target="_blank" class="dropdown-item">Virbela</a>-->
+          <!--
+          <a class="dropdown-item" routerLink="office">Netready</a>-->
+          <!--<a href="https://www.office.com/" target="_blank" class="dropdown-item">Office 365</a>-->
+          <a class="dropdown-item" href="https://support.maxprop.digital" target="_blank">Knowledge Library</a>
+          <a class="dropdown-item" href="https://support.maxprop.digital/portal/sign_in" target="_blank">Support Tickets</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" *ngIf="auth.authenticated">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Quick Links
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">

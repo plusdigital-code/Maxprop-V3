@@ -20,6 +20,7 @@ import { CommercialViewComponent } from './commercial-view/commercial-view.compo
 import { CommercialIndexComponent } from './commercial-index/commercial-index.component';
 import { EditComponent } from './edit/edit-component';
 import { CreateComponent } from './create/create-component';
+
 @NgModule({
   declarations: [ResourceComponent, EditComponent, CreateComponent, CommercialViewComponent, CommercialIndexComponent],
   imports: [
@@ -66,6 +67,10 @@ import { CreateComponent } from './create/create-component';
           {
             path: 'commercial-leads',
             loadChildren: './commercial-leads/commercial-leads.module#CommercialLeadsModule'
+          },
+          {
+            path: 'commercial-brochure',
+            loadChildren: './commercial-brochure/commercial-brochure.module#CommercialBrochureModule'
           },
           {
             path: 'commercial-viewings',
