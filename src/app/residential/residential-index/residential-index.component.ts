@@ -81,10 +81,10 @@ onRowClicked(event) {
           return this.data.push({
             "address": element.data.address.formatted_address,
             "listingType": element.data.listingType,
-            "propertyType": element.data.propertyType.data.label,
-            "primaryProperty": element.data.user.data?element.data.user.data.firstName+" "+element.data.user.data.lastName:'',
+            "propertyType": element.data.propertyType && element.data.propertyType.data && element.data.propertyType.data.label ? element.data.propertyType.data.label : "",
+            "primaryProperty": element.data.user && element.data.user.data?element.data.user.data.firstName+" "+element.data.user.data.lastName:'',
             "price": element.data.price,
-            "suburb": element.data.suburbRef.data.suburb,
+            "suburb": element.data.suburbRef.data ? element.data.suburbRef.data.suburb : "",
             "bedrooms": element.data.bedrooms,
             "unitNumber": element.data.unitNumber ? element.data.unitNumber : '',
             "sectionalSchemeName": element.data.sectionalSchemeName,
