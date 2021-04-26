@@ -4,6 +4,7 @@ import {
   FormioResourceViewComponent,
   FormioResourceEditComponent,
   FormioResourceDeleteComponent,
+  FormioResourceCreateComponent,
   FormioResourceComponent
 } from 'angular-formio/resource';
 import { CityComponent } from './city/city.component';
@@ -14,6 +15,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'list',
     pathMatch: 'full'
+  },
+  {
+    path: 'new',
+    component: FormioResourceCreateComponent
   },
   { path: 'list', component: CityComponent },
   {

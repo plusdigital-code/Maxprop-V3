@@ -42,12 +42,16 @@ export class CityComponent implements OnInit {
   totalRows = undefined;
   urlParams = ''
 
-  constructor(private cityService: CityService, private datepipe: DatePipe,) { }
+  constructor(private cityService: CityService, private datepipe: DatePipe,private router: Router) { }
 
   ngOnInit() {
     this.cityService.getGridData().subscribe(resp => {
       this.rowData = resp;
     })
+  }
+
+  newListing(){
+    this.router.navigate([`/city/new`]);
   }
 
   async onGridReady(params: any) {

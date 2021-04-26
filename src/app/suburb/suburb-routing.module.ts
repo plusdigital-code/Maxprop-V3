@@ -21,6 +21,10 @@ const routes: Routes = [
     redirectTo: 'list',
     pathMatch: 'full'
   },
+  {
+    path: 'new',
+    component: FormioResourceCreateComponent
+  },
   {path:'list', component:SuburblistComponent},
   {
     path: ':id',

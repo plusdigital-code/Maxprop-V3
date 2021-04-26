@@ -42,13 +42,17 @@ export class SuburblistComponent implements OnInit {
   totalRows = undefined;
   urlParams = ''
 
-  constructor(private suburbService: SuburbService, private datepipe: DatePipe,) { }
+  constructor(private suburbService: SuburbService, private datepipe: DatePipe,private router: Router) { }
 
   ngOnInit() {
     this.suburbService.getGridData().subscribe(resp => {
       this.rowData = resp;
     })
   }
+
+  newListing(){
+      this.router.navigate([`/suburb/new`]);
+    }
 
   async onGridReady(params: any) {
 
