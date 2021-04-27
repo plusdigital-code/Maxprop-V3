@@ -36,7 +36,7 @@ export class ListingComponent implements OnInit {
     { headerName: 'City', width: 80, field: 'city', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Suburb', width: 140, field: 'suburb', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Address', width: 250, field: 'address', filter: 'agTextColumnFilter', sortable: true },
-        { headerName: 'Unit Number', width: 120, field: 'unitNumber' },
+    { headerName: 'Unit Number', width: 120, field: 'unitNumber' },
     { headerName: 'Scheme Name', width: 150, field: 'sectionalSchemeName', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'No. Of Bedrooms', width: 140, field: 'bedrooms', filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'No. Of Bathrooms', width: 140, field: 'bathrooms', filter: 'agNumberColumnFilter', sortable: true },
@@ -44,6 +44,42 @@ export class ListingComponent implements OnInit {
     { headerName: 'Car Ports', width: 100, field: 'carPorts', filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'Floor Size', width: 100, field: 'floorSize', filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'Land Size', width: 100, field: 'landSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'PPID', width: 100, field: 'privateProperty', filter: 'agTextColumnFilter', cellRenderer: (data) => {
+      if(data.value == 1 || data.value == ''){
+        return "-";
+       }else{
+        return `${data.value}`
+       }
+      },
+        sortable: true },
+    {
+      headerName: 'PP', width: 100, field: 'ppLink', cellRenderer: (data) => {
+        if(data.value == 1 || data.value == ''){
+          return "-"
+        }else{
+        return `<a href= ${data.value}
+      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
+      }
+    }, sortable: true
+    },
+    { headerName: 'P24ID', width: 100, field: 'property24', filter: 'agTextColumnFilter', cellRenderer: (data) => {
+      if(data.value == 1 || data.value == ''){
+        return "-";
+       }else{
+        return `${data.value}`
+       }
+      }, sortable: true },
+    {
+      headerName: 'P24', width: 100, field: 'p24Link', cellRenderer: (data) => {
+        if(data.value == 1 || data.value == ''){
+          return "-"
+        }else{
+        return `<a href= ${data.value}
+      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
+      }
+    },
+      sortable: true
+    },
     { headerName: 'Status', width: 80, field: 'listingStatus', filter: 'agTextColumnFilter', sortable: true },
   ];
   public rowData: any[];
@@ -73,8 +109,8 @@ export class ListingComponent implements OnInit {
           filterOptions: ['equals', 'greaterThan', 'lessThan'],
           suppressAndOrCondition: true
         }
-      } 
-      else if(ele.filter == "agDateColumnFilter"){
+      }
+      else if (ele.filter == "agDateColumnFilter") {
         ele.filterParams = {
           filterOptions: ['equals', 'greaterThan', 'lessThan', 'inRange'],
           suppressAndOrCondition: true
@@ -82,7 +118,7 @@ export class ListingComponent implements OnInit {
       }
       else {
         ele.filterParams = {
-          filterOptions: ['contains', 'notEqual','equals'],
+          filterOptions: ['contains', 'notEqual', 'equals'],
           suppressAndOrCondition: true
         }
       }
@@ -103,12 +139,12 @@ export class ListingComponent implements OnInit {
     }, 1)
   }
 
-  createUrlParams(startRow: number, endRow: number, sort, filter){
+  createUrlParams(startRow: number, endRow: number, sort, filter) {
     return new Promise((resolve) => {
       let searchData: any = '&data.user.data.office._id=' + this.officeId + '&data.listingStatus=' + this.activeTab;
       let sortData = '-created';
       let limit = 17;
-  
+
       if (sort.length) {
         let sortField = sort[0].colId;
         let sortType = sort[0].sort;
@@ -120,29 +156,29 @@ export class ListingComponent implements OnInit {
       } else {
         sortData = '-modified';
       }
-  
+
       if (Object.keys(filter).length) {
         for (let key in filter) {
           console.log(filter[key])
           if (filter[key].filterType && filter[key].filterType == "date") {
-            if(filter[key].type == 'equals'){
+            if (filter[key].type == 'equals') {
               let date = new Date(filter[key].dateFrom);
               let startDate = date.toISOString();
-              let endDate = date.setHours(23,59,0,0);
-              searchData = searchData + "&created__gt="+ startDate + "&created__lt=" + endDate
+              let endDate = date.setHours(23, 59, 0, 0);
+              searchData = searchData + "&created__gt=" + startDate + "&created__lt=" + endDate
               // create less than or greater than condition.
-            } else if(filter[key].type == 'inRange'){
+            } else if (filter[key].type == 'inRange') {
               let startDate = new Date(filter[key].dateFrom).toISOString();
               let endDate = new Date(filter[key].dateTo).toISOString();
-              searchData = searchData + "&created__gt="+ startDate + "&created__lt=" + endDate
+              searchData = searchData + "&created__gt=" + startDate + "&created__lt=" + endDate
               // create start and end date - with leas than or greater than
-            } else if(filter[key].type == 'greaterThan'){
+            } else if (filter[key].type == 'greaterThan') {
               let startDate = new Date(filter[key].dateFrom).toISOString();
-              searchData = searchData + "&created__gt="+ startDate
+              searchData = searchData + "&created__gt=" + startDate
               // create only greater than condition
-            } else if(filter[key].type == 'lessThan'){
+            } else if (filter[key].type == 'lessThan') {
               let endDate = new Date(filter[key].dateFrom).toISOString();
-              searchData = searchData  + "&created__lt=" + endDate
+              searchData = searchData + "&created__lt=" + endDate
               // create only less than conditon
             }
           }
@@ -207,6 +243,11 @@ export class ListingComponent implements OnInit {
       return 'created'
     } else if (name == 'lastUpdated') {
       return 'modified'
+    }else if(name == 'property24'){
+      return 'data.property24.p24ID';
+    }
+    else if(name == 'privateProperty'){
+      return 'data.privateProperty.ppID';
     }
   }
 
@@ -264,7 +305,11 @@ export class ListingComponent implements OnInit {
             "id": element._id,
             "listingStatus": element.data.listingStatus,
             "createdTime": new Date(element.created),
-            "lastUpdated": new Date(element.modified)
+            "lastUpdated": new Date(element.modified),
+            "property24": element.data.property24.p24ID?element.data.property24.p24ID:'-',
+            "privateProperty": element.data.privateProperty.ppID?element.data.privateProperty.ppID:'-',
+            "p24Link": element.data.property24.p24ID ? element.data.property24.p24Link:1,
+            "ppLink": element.data.privateProperty.ppID?element.data.privateProperty.ppLink:1,
           });
         }
         this.gridParams.api.hideOverlay();
