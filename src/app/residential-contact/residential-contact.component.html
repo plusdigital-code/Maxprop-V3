@@ -1,8 +1,8 @@
-<ul _ngcontent-ejg-c4="" class="nav nav-tabs resource-list">
+<ul _ngcontent-ejg-c4="" class="nav nav-tabs resource-list" *ngIf="!admin"> 
   <!-- <li class="nav-item"><a _ngcontent-ejg-c4="" [ngClass]="{'selected_tab': tabType === 'all'}" class="nav-link"
       routerlink="edit" routerlinkactive="active" ng-reflect-router-link="edit" (click)='allListing()'>
       All</a></li> -->
-  <li class="nav-item"><a _ngcontent-ejg-c4="" [ngClass]="{'selected_tab': tabType === 'myListing'}" class="nav-link"
+  <li class="nav-item"><a _ngcontent-ejg-c4=""   [ngClass]="{'selected_tab': tabType === 'myListing'}" class="nav-link"
       routerlink="edit" routerlinkactive="active" ng-reflect-router-link="edit" >
       My Listing</a></li>
 </ul>

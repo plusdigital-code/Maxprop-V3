@@ -59,7 +59,7 @@ export class ResidentialContactComponent implements OnInit {
   public tabType: TabType = 'myListing';
   public firstName: any;
   public lastName: any;
-  admin: boolean;
+  public  admin: boolean = false;
   constructor(private http: HttpClient, private router: Router,public auth: FormioAuthService) {
   }
   ngOnInit() {
@@ -82,9 +82,12 @@ export class ResidentialContactComponent implements OnInit {
         if(a == '5de422739499161d8586f42f'){
       this.email = '';
       this.tabType = "all";
+      this.admin = true;
     }else{
       this.email = userData.data.email;
       this.tabType = "myListing";
+      this.admin = false;
+
       }
   
   }
