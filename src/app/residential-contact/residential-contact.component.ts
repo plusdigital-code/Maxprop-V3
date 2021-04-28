@@ -7,7 +7,8 @@ import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
 import { ViewChild } from '@angular/core';
 import { type } from 'os';
 import { Observable } from 'rxjs';
-
+import { FormioAuthService } from 'angular-formio/auth';
+import { ActivatedRoute } from '@angular/router';
 type TabType = 'all' | 'myListing'
 
 @Component({
@@ -58,12 +59,12 @@ export class ResidentialContactComponent implements OnInit {
   public tabType: TabType = 'myListing';
   public firstName: any;
   public lastName: any;
-
-  constructor(private http: HttpClient, private router: Router) {
-
+  admin: boolean;
+  constructor(private http: HttpClient, private router: Router,public auth: FormioAuthService) {
   }
-
   ngOnInit() {
+    let a = this.auth.user.roles.find(a => a == "5de422739499161d8586f42f");
+
     this.gridOptions = {
       rowSelection: 'single',
       cacheBlockSize: 17,
@@ -75,9 +76,17 @@ export class ResidentialContactComponent implements OnInit {
       paginationAutoPageSize: true,
       animateRows: true
     };
-
+  
     let userData = JSON.parse(localStorage.getItem('formioAppUser'));
-    this.email = userData.data.email;
+
+        if(a == '5de422739499161d8586f42f'){
+      this.email = '';
+      this.tabType = "all";
+    }else{
+      this.email = userData.data.email;
+      this.tabType = "myListing";
+      }
+  
   }
 
 
@@ -117,13 +126,17 @@ export class ResidentialContactComponent implements OnInit {
     }
 
     //console.log("searchstring  ",searchData)
-
     if (this.tabType == 'myListing') {
       searchData = searchData + '&data.residentials1.data.user.data.email=' + this.email
+      let url = 'https://whitefang-digitaloffice.form.io/contact/submission?sort=' + sortData + '&skip=' + startRow + '&limit=' + limit + '&select=' + selectFields + '&' + searchData;
+      return this.http.get<any[]>(url, {headers})
     }
 
-    let url = 'https://whitefang-digitaloffice.form.io/contact/submission?sort=' + sortData + '&skip=' + startRow + '&limit=' + limit + '&select=' + selectFields + '&' + searchData;
-    return this.http.get<any[]>(url, {headers})
+    if (this.tabType == 'all') {
+      let url = 'https://whitefang-digitaloffice.form.io/contact/submission?sort=' + sortData + '&skip=' + startRow + '&limit=' + limit + '&select=' + selectFields ;
+      return this.http.get<any[]>(url, {headers})
+    }
+   
   }
 
   getFieldName(name){
@@ -188,6 +201,13 @@ export class ResidentialContactComponent implements OnInit {
     if (this.tabType == 'myListing') {
       var searchData = 'data.residentials1.data.user.data.email=' + this.email
     }
+
+    if (this.tabType == 'all') {
+      var searchData = '';
+    }
+    
+
+    
     return new Promise(resolve => {
       let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6').set('content-type', 'application/json');
       this.http.get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?skip=0&limit=100000&select=_id&'+searchData, { headers }).subscribe(resp => {

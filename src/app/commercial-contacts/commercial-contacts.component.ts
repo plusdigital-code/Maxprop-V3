@@ -4,10 +4,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AgGridAngular } from 'ag-grid-angular';
 import { Router } from '@angular/router';
 import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
+import { FormioAuthService } from 'angular-formio/auth';
 
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -33,7 +35,7 @@ export class CommercialContactsComponent implements OnInit {
   rowData: any;
 
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router,public auth: FormioAuthService) {
 
   }
 
@@ -96,8 +98,16 @@ export class CommercialContactsComponent implements OnInit {
   ngOnInit() {
     let userData = JSON.parse(localStorage.getItem('formioAppUser'));
     this.email = userData.data.email;
+    let admin_role_id = this.auth.user.roles.find(a => a == "5de422739499161d8586f42f");
+    if(admin_role_id == '5de422739499161d8586f42f'){
+    this.a = '';
+    this.email = '';
+    this.gridData(`${this.email}`);
+    }else{
     this.a = this.email;
     this.gridData(`${this.email}`);
+  }
+
     // this.gridData(this.a);
   }
 
