@@ -23,6 +23,14 @@ export class CommercialContactsComponent implements OnInit {
   public res: string[] = [];
 
   columnDefs = [
+    {
+      headerName: 'Agent Name ', width: 270, field: 'agentName', filter: 'agTextColumnFilter',
+      filterParams: {
+        filterOptions: ['equals', 'notEqual', 'contains',],
+        suppressAndOrCondition: true
+      },
+      sortable: true
+    },
     { headerName: 'Lead Source', width: 170, field: 'leadSource', filter: 'agTextColumnFilter', sortable: true },
 
     { headerName: ' Status ', width: 170, field: 'status', filter: 'agTextColumnFilter', sortable: true },
@@ -82,6 +90,7 @@ export class CommercialContactsComponent implements OnInit {
         this.data = [];
         res.forEach(element => {
           return this.data.push({
+            "agentName":`${element.data.residentials1.data.user.data.firstName+' '+element.data.residentials1.data.user.data.lastName}`,
             "status": element.data.status ? element.data.fullName : '-',
             "fullName": element.data.fullName,
             "email": element.data.email,

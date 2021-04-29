@@ -20,6 +20,14 @@ export class ResidentialContactComponent implements OnInit {
   @ViewChild('agGrid') agGrid: AgGridAngular;
   columnDefs = [
     {
+      headerName: 'Agent Name ', width: 270, field: 'agentName', filter: 'agTextColumnFilter',
+      filterParams: {
+        filterOptions: ['equals', 'notEqual', 'contains',],
+        suppressAndOrCondition: true
+      },
+      sortable: true
+    },
+    {
       headerName: 'Mandate ', width: 270, field: 'mandate', filter: 'agTextColumnFilter',
       filterParams: {
         filterOptions: ['equals', 'notEqual', 'contains',],
@@ -119,7 +127,7 @@ export class ResidentialContactComponent implements OnInit {
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6').set('content-type', 'application/json');
     let searchData:any = '';
     let sortData = '-modified';
-    let selectFields = 'data.residentials1.data.address.formatted_address,data.fullName,data.email,data.mobile,data.message,data.source,_id';
+    let selectFields = 'data.residentials1.data,data.fullName,data.email,data.mobile,data.message,data.source,_id';
     let limit = 17;
     if (sort.length) {
       let sortField = sort[0].colId;
@@ -199,6 +207,7 @@ export class ResidentialContactComponent implements OnInit {
             for (let i = 0; i < data.length; i++) {
               let element = data[i];
               parSedData.push({
+                "agentName":`${element.data.residentials1.data.user.data.firstName+' '+element.data.residentials1.data.user.data.lastName}`,
                 "mandate": element.data.residentials1.data ? element.data.residentials1.data.address.formatted_address : '-',
                 "fullName": element.data.fullName,
                 "email": element.data.email,
