@@ -66,6 +66,7 @@ export class ListingComponent implements OnInit {
       if(data.value == 1 || data.value == ''){
         return "-";
        }else{
+         
         return `${data.value}`
        }
       }, sortable: true },

@@ -78,14 +78,14 @@ export class AppComponent {
 			indexName: 'maxprop_Practitioners',
 			fieldToDisplay: 'name'
 		},
-		{
-			path: '/residential',
-			indexName: 'maxprop_App_Residential',
-			fieldToDisplay: 'address',
-			code:'code',
-			cover:'cover',
-			price:'price',
-		}
+		// {
+		// 	path: '/residential',
+		// 	indexName: 'maxprop_App_Residential',
+		// 	fieldToDisplay: 'address',
+		// 	code:'code',
+		// 	cover:'cover',
+		// 	price:'price',
+		// }
 	];
 	showSearch = false;
 

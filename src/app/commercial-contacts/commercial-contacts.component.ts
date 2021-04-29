@@ -96,6 +96,27 @@ export class CommercialContactsComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.columnDefs.forEach((ele: any) => {
+      if (ele.filter == "agNumberColumnFilter") {
+        ele.filterParams = {
+          filterOptions: ['equals', 'greaterThan', 'lessThan'],
+          suppressAndOrCondition: true
+        }
+      }
+      else if (ele.filter == "agDateColumnFilter") {
+        ele.filterParams = {
+          filterOptions: ['equals', 'greaterThan', 'lessThan', 'inRange'],
+          suppressAndOrCondition: true
+        }
+      }
+      else {
+        ele.filterParams = {
+          filterOptions: ['contains', 'notEqual', 'equals'],
+          suppressAndOrCondition: true
+        }
+      }
+    })
+    
     let userData = JSON.parse(localStorage.getItem('formioAppUser'));
     this.email = userData.data.email;
     let admin_role_id = this.auth.user.roles.find(a => a == "5de422739499161d8586f42f");

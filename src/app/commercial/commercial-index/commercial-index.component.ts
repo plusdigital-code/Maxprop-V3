@@ -52,7 +52,43 @@ export class CommercialIndexComponent implements OnInit {
     { headerName: 'Seller Name', width: 150, field: 'sellerName',filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Seller Mobile', width: 150, field: 'sellerMobile',filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Seller Work Number', width: 150, field: 'sellerWorkNumber',filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Seller Email', width: 150, field: 'sellerEmail',filter: 'agTextColumnFilter', sortable: true }
+    { headerName: 'Seller Email', width: 150, field: 'sellerEmail',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'PPID', width: 100, field: 'privateProperty', filter: 'agTextColumnFilter', cellRenderer: (data) => {
+      if(data.value == 1 || data.value == ''){
+        return "-";
+       }else{
+        return `${data.value}`
+       }
+      },
+        sortable: true },
+    {
+      headerName: 'PP', width: 100, field: 'ppLink', cellRenderer: (data) => {
+        if(data.value == 1 || data.value == ''){
+          return "-"
+        }else{
+        return `<a href= ${data.value}
+      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
+      }
+    }, sortable: true
+    },
+    { headerName: 'P24ID', width: 100, field: 'property24', filter: 'agTextColumnFilter', cellRenderer: (data) => {
+      if(data.value == 1 || data.value == ''){
+        return "-";
+       }else{
+        return `${data.value}`
+       }
+      }, sortable: true },
+    {
+      headerName: 'P24', width: 100, field: 'p24Link', cellRenderer: (data) => {
+        if(data.value == 1 || data.value == ''){
+          return "-"
+        }else{
+        return `<a href= ${data.value}
+      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
+      }
+    },
+      sortable: true
+    },
   ];
 
 
@@ -134,6 +170,10 @@ export class CommercialIndexComponent implements OnInit {
               "sellerMobile": element.data.sellerMobile?element.data.sellerMobile:'-',
               "sellerWorkNumber": element.data.sellerWorkNumber?element.data.sellerWorkNumber:'-',
               "sellerEmail": element.data.sellerEmail?element.data.sellerEmail:'-',
+              "property24": element.data.property24.p24ID?element.data.property24.p24ID:'-',
+              "privateProperty": element.data.privateProperty.ppID?element.data.privateProperty.ppID:'-',
+              "p24Link": element.data.property24.p24ID ? element.data.property24.p24Link:1,
+              "ppLink": element.data.privateProperty.ppID?element.data.privateProperty.ppLink:1,
             });
           }
         });
