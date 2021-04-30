@@ -125,9 +125,9 @@ export class ResidentialContactComponent implements OnInit {
   getRowData(startRow: number, endRow: number, sort, filter): Observable<any[]> {
     this.gridParams.api.showLoadingOverlay()
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6').set('content-type', 'application/json');
-    let searchData:any = '';
+    let searchData:any = 'data.assignedPractitioner.data.office._id=60105dec311325c21d5c0799';
     let sortData = '-modified';
-    let selectFields = 'data.residentials1.data,data.fullName,data.email,data.mobile,data.message,data.source,_id';
+    let selectFields = 'data.residentials1.data,data.fullName,data.email,data.mobile,data.message,data.source,_id,data.assignedPractitioner.data.office._id';
     let limit = 17;
     if (sort.length) {
       let sortField = sort[0].colId;
@@ -165,7 +165,7 @@ export class ResidentialContactComponent implements OnInit {
     }
 
     if (this.tabType == 'all') {
-      let url = 'https://whitefang-digitaloffice.form.io/contact/submission?sort=' + sortData + '&skip=' + startRow + '&limit=' + limit + '&select=' + selectFields ;
+      let url = 'https://whitefang-digitaloffice.form.io/contact/submission?sort=' + sortData + '&skip=' + startRow + '&limit=' + limit + '&select=' + selectFields + '&' + searchData ;
       return this.http.get<any[]>(url, {headers})
     }
    
@@ -232,18 +232,18 @@ export class ResidentialContactComponent implements OnInit {
 
   getTotalRows() {
     if (this.tabType == 'myListing') {
-      var searchData = 'data.residentials1.data.user.data.email=' + this.email
+      var searchData = 'data.assignedPractitioner.data.office._id=60105dec311325c21d5c0799&data.residentials1.data.user.data.email=' + this.email
     }
 
     if (this.tabType == 'all') {
-      var searchData = '';
+      var searchData = 'data.assignedPractitioner.data.office._id=60105dec311325c21d5c0799';
     }
     
 
     
     return new Promise(resolve => {
       let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6').set('content-type', 'application/json');
-      this.http.get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?skip=0&limit=100000&select=_id&'+searchData, { headers }).subscribe(resp => {
+      this.http.get<any[]>('https://whitefang-digitaloffice.form.io/contact/submission?skip=0&limit=100000&select=_id,data.assignedPractitioner.data.office._id'+'&'+ searchData, { headers }).subscribe(resp => {
         resolve(resp.length)
       })
     })
