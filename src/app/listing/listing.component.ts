@@ -44,41 +44,77 @@ export class ListingComponent implements OnInit {
     { headerName: 'Car Ports', width: 100, field: 'carPorts', filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'Floor Size', width: 100, field: 'floorSize', filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'Land Size', width: 100, field: 'landSize', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'PPID', width: 100, field: 'privateProperty', filter: 'agTextColumnFilter', cellRenderer: (data) => {
-      if(data.value == 1 || data.value == ''){
-        return "-";
-       }else{
-        return `${data.value}`
-       }
+    {
+      headerName: 'PPID', width: 100, field: 'privateProperty', filter: 'agTextColumnFilter', cellRenderer: (data) => {
+        if (!data.value) {
+          return
+        }
+        if (data.value == 1 || data.value == '') {
+          return "-";
+        } else {
+          return `${data.value}`
+        }
       },
-        sortable: true },
+      sortable: true
+    },
     {
       headerName: 'PP', width: 100, field: 'ppLink', cellRenderer: (data) => {
-        if(data.value == 1 || data.value == ''){
+        if (!data.value) {
+          return
+        }
+        if (data.value == 1 || data.value == '') {
           return "-"
-        }else{
-        return `<a href= ${data.value}
+        } else {
+          return `<a href= ${data.value}
       target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
-      }
-    }, sortable: true
+        }
+      }, sortable: true
     },
-    { headerName: 'P24ID', width: 100, field: 'property24', filter: 'agTextColumnFilter', cellRenderer: (data) => {
-      if(data.value == 1 || data.value == ''){
-        return "-";
-       }else{
-         
-        return `${data.value}`
-       }
-      }, sortable: true },
+    {
+      headerName: 'P24ID', width: 100, field: 'property24', filter: 'agTextColumnFilter', cellRenderer: (data) => {
+        if (!data.value) {
+          return
+        }
+        if (data.value == 1 || data.value == '') {
+          return "-";
+        } else {
+
+          return `${data.value}`
+        }
+      }, sortable: true
+    },
     {
       headerName: 'P24', width: 100, field: 'p24Link', cellRenderer: (data) => {
-        if(data.value == 1 || data.value == ''){
+        if (!data.value) {
+          return
+        }
+        if (data.value == 1 || data.value == '') {
           return "-"
-        }else{
+        } else {
+          return `<a href= ${data.value}
+      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
+        }
+      },
+      sortable: true
+    },
+    {
+      headerName: 'Listing Brochure', width: 100, field: 'listingBrochure', cellRenderer: (data) => {
+        if (!data.value) {
+          return
+        }
+        return `<a href= https://properties-digital-office.s3-us-west-2.amazonaws.com/brochures/detail/${data.value}.pdf
+      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
+      },
+      sortable: true
+    },
+    {
+      headerName: 'House Brochure', width: 100, field: 'houseBrochure', cellRenderer: (data) => {
+        if (!data.value) {
+          return
+        }
         return `<a href= ${data.value}
       target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
-      }
-    },
+      },
       sortable: true
     },
     { headerName: 'Status', width: 80, field: 'listingStatus', filter: 'agTextColumnFilter', sortable: true },
@@ -244,10 +280,10 @@ export class ListingComponent implements OnInit {
       return 'created'
     } else if (name == 'lastUpdated') {
       return 'modified'
-    }else if(name == 'property24'){
+    } else if (name == 'property24') {
       return 'data.property24.p24ID';
     }
-    else if(name == 'privateProperty'){
+    else if (name == 'privateProperty') {
       return 'data.privateProperty.ppID';
     }
   }
@@ -307,12 +343,15 @@ export class ListingComponent implements OnInit {
             "listingStatus": element.data.listingStatus,
             "createdTime": new Date(element.created),
             "lastUpdated": new Date(element.modified),
-            "property24": element.data.property24.p24ID?element.data.property24.p24ID:'-',
-            "privateProperty": element.data.privateProperty.ppID?element.data.privateProperty.ppID:'-',
-            "p24Link": element.data.property24.p24ID ? element.data.property24.p24Link:1,
-            "ppLink": element.data.privateProperty.ppID?element.data.privateProperty.ppLink:1,
+            "property24": element.data.property24.p24ID ? element.data.property24.p24ID : '-',
+            "privateProperty": element.data.privateProperty.ppID ? element.data.privateProperty.ppID : '-',
+            "p24Link": element.data.property24.p24ID ? element.data.property24.p24Link : 1,
+            "ppLink": element.data.privateProperty.ppID ? element.data.privateProperty.ppLink : 1,
+            "listingBrochure": element.data.codeDisplay,
+            "houseBrochure": element.data.brochures.showHouseBrochure
           });
         }
+
         this.gridParams.api.hideOverlay();
         if (!parSedData.length) {
           this.gridParams.api.showNoRowsOverlay()
@@ -330,7 +369,11 @@ export class ListingComponent implements OnInit {
     this.gridParams.api.setFilterModel(null);
   }
 
-  onRowClicked(event) {
+  cellClicked(event) {
+    let value = event.colDef.headerName;
+    if (value == 'PP' || value == 'P24' || value == 'Listing Brochure' || value == 'House Brochure') {
+      return;
+    }
     const url = window.location.href;
     window.open(`/#/residential/${event.data.id}/view`, '_blank');
   }

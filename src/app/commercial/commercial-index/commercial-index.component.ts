@@ -63,6 +63,9 @@ export class CommercialIndexComponent implements OnInit {
         sortable: true },
     {
       headerName: 'PP', width: 100, field: 'ppLink', cellRenderer: (data) => {
+        if (!data.value) {
+          return
+        }
         if(data.value == 1 || data.value == ''){
           return "-"
         }else{
@@ -72,6 +75,9 @@ export class CommercialIndexComponent implements OnInit {
     }, sortable: true
     },
     { headerName: 'P24ID', width: 100, field: 'property24', filter: 'agTextColumnFilter', cellRenderer: (data) => {
+      if (!data.value) {
+        return
+      }
       if(data.value == 1 || data.value == ''){
         return "-";
        }else{
@@ -80,6 +86,9 @@ export class CommercialIndexComponent implements OnInit {
       }, sortable: true },
     {
       headerName: 'P24', width: 100, field: 'p24Link', cellRenderer: (data) => {
+        if (!data.value) {
+          return
+        }
         if(data.value == 1 || data.value == ''){
           return "-"
         }else{
@@ -89,6 +98,24 @@ export class CommercialIndexComponent implements OnInit {
     },
       sortable: true
     },
+    {
+      headerName: 'Listing Brochure', width: 100, field: 'houseBrochure', cellRenderer: (data) => {
+      //   return `<a href= https://properties-digital-office.s3-us-west-2.amazonaws.com/brochures/detail/${data.value}.pdf
+      // target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
+      return `<a href= ${data.value}
+      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
+    },
+      sortable: true
+    },
+    {
+      headerName: 'House Brochure', width: 100, field: 'houseBrochure', cellRenderer: (data) => {
+       
+        return `<a href= ${data.value}
+      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
+    },
+      sortable: true
+    },
+
   ];
 
 
@@ -111,7 +138,12 @@ export class CommercialIndexComponent implements OnInit {
   public a = 'active';
   public firstName: any;
   public lastName: any;
-  onRowClicked(event) {
+  cellClicked(event) {
+    let value = event.colDef.headerName;
+    if (value == 'PP' || value == 'P24' || value == 'Listing Brochure' || value == 'House Brochure') {
+      return;
+    }
+
     const url = window.location.href;
     window.open(`/#/commercial/${event.data.id}/view`, '_blank');
   }
@@ -174,6 +206,8 @@ export class CommercialIndexComponent implements OnInit {
               "privateProperty": element.data.privateProperty.ppID?element.data.privateProperty.ppID:'-',
               "p24Link": element.data.property24.p24ID ? element.data.property24.p24Link:1,
               "ppLink": element.data.privateProperty.ppID?element.data.privateProperty.ppLink:1,
+              "listingBrochure":element.data.codeDisplay,
+              "houseBrochure":element.data.brochures.showHouseBrochure
             });
           }
         });

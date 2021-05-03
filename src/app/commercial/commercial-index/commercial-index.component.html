@@ -43,7 +43,7 @@
       Reset Filters</a></li>
 </ul>
 <ag-grid-angular #myGrid style="height: 556px;" class="ag-theme-balham" [rowData]="rowData" [columnDefs]="columnDefs"
-  [gridOptions]="gridOptions" [pagination]=true [paginationPageSize]="17" (rowClicked)="onRowClicked($event)">
+  [gridOptions]="gridOptions" [pagination]=true [paginationPageSize]="17" (cellClicked)="cellClicked($event)">
 </ag-grid-angular>
 
 <button class="btn btn-primary pull-left float-left" (click)="newListing()"><i
