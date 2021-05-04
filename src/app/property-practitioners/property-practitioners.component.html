@@ -1,0 +1,9 @@
+<h2 class="residential-index"><i class="fas fa-home"></i> Users </h2>
+<ag-grid-angular #myGrid style="height: 556px;" class="ag-theme-balham" [rowData]="rowData" [columnDefs]="columnDefs"
+  [gridOptions]="gridOptions" [pagination]=true [paginationPageSize]="17" (cellClicked)="cellClicked($event)">
+</ag-grid-angular>
+
+<button class="btn btn-primary pull-left float-left" (click)="newUser()"><i
+    class="glyphicon glyphicon-plus fa fa-plus"></i> New User</button>
+<hr class="residential-index-hr" />
+

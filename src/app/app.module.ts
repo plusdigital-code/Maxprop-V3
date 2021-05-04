@@ -25,6 +25,8 @@ import { CommercialContactsComponent } from './commercial-contacts/commercial-co
 import { ResidentialContactComponent } from './residential-contact/residential-contact.component';
 import { DatePipe } from '@angular/common';
 import { ListingComponent } from './listing/listing.component';
+import { PropertyPractitionersComponent } from './property-practitioners/property-practitioners.component';
+
 
 
 
@@ -41,7 +43,8 @@ import { ListingComponent } from './listing/listing.component';
     FooterComponent,
     CommercialContactsComponent,
     ResidentialContactComponent,
-    ListingComponent
+    ListingComponent,
+    PropertyPractitionersComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -102,6 +105,11 @@ import { ListingComponent } from './listing/listing.component';
       {
         path: 'user',
         loadChildren: './user/user.module#UserModule'
+      },
+      {
+        path: 'users',
+        // loadChildren: './user/user.module#UserModule'
+        component:PropertyPractitionersComponent
       },
       {
         path: 'account',
