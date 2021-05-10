@@ -140,9 +140,9 @@ export class CommercialContactsComponent implements OnInit {
         sortData = 'data.fullName'
       } else if (sortField == 'email') {
         sortData = 'data.email'
-      } else if (sortField == 'monile') {
+      } else if (sortField == 'mobile') {
         sortData = 'data.mobile'
-      }
+      }else if (sortField == 'agentName')
       if (sortType == 'desc') {
         sortData = '-' + sortData
       }
@@ -152,7 +152,7 @@ export class CommercialContactsComponent implements OnInit {
     if (Object.keys(filter).length) {
       for(let key in filter){
         searchData = searchData.length 
-            ? searchData + ','+ this.getFieldName(key) + this.getFilterTypeAndValue(filter[key].type,filter[key].filter) 
+            ? searchData + '&'+ this.getFieldName(key) + this.getFilterTypeAndValue(filter[key].type,filter[key].filter) 
             : searchData + this.getFieldName(key) + this.getFilterTypeAndValue(filter[key].type,filter[key].filter)
       }
     }
@@ -180,9 +180,11 @@ export class CommercialContactsComponent implements OnInit {
       return 'data.fullName'
     } else if (name == 'email') {
       return 'data.email'
-    } else if (name == 'monile') {
+    } else if (name == 'mobile') {
       return 'data.mobile'
-    }
+    }else if(name == 'agentName'){
+      return `${'data.commercial1.data.user.data.firstName' }`
+          }
   }
 
   getFilterTypeAndValue(type,key){
