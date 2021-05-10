@@ -125,7 +125,7 @@ export class CommercialContactsComponent implements OnInit {
   getRowData(startRow: number, endRow: number, sort, filter): Observable<any[]> {
     this.gridParams.api.showLoadingOverlay()
     let headers = new HttpHeaders().set('x-token', 'C7rBtDpCVAXqjx4RPOjD2jpe0Xati6').set('content-type', 'application/json');
-    let searchData:any = 'data.commercial1.data.user.data.office._id=60105dec311325c21d5c0799';
+    let searchData:any = 'data.commercial1.data.user.data.office._id__ne=60105dec311325c21d5c0799';
     let sortData = '-modified';
     let selectFields = 'data.fullName,data.email,data.mobile,data.message,data.source,_id,data.commercial1.data.user,data.commercial1.data.address.formatted_address';
     let limit = 17;
@@ -232,11 +232,11 @@ export class CommercialContactsComponent implements OnInit {
 
   getTotalRows() {
     if (this.tabType == 'myListing') {
-      var searchData = 'data.commercial1.data.user.data.office._id=60105dec311325c21d5c0799&data.commercial1.data.user.data.email=' + this.email
+      var searchData = 'data.commercial1.data.user.data.office._id__ne=60105dec311325c21d5c0799&data.commercial1.data.user.data.email=' + this.email
     }
 
     if (this.tabType == 'all') {
-      var searchData = 'data.commercial1.data.user.data.office._id=60105dec311325c21d5c0799';
+      var searchData = 'data.commercial1.data.user.data.office._id__ne=60105dec311325c21d5c0799';
     }
     
 
