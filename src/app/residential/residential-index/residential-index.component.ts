@@ -146,12 +146,12 @@ export class ResidentialIndexComponent implements OnInit {
 
   handleTabClick(type) {
     this.totalRows = undefined;
-    if (this.activeTab == type) {
+    if (this.activeTab === type) {
       return;
     }
     // if clicked tab is myListing, i need to find out another way to get mylisting other than using username and filtering out data with that username.
     // is it possible to use any type of ID to only fetch data of mylisting rather than filtering out.
-    this.activeTab = type
+    this.activeTab = type;
     this.isGridReady = false;
     setTimeout(() => {
       this.isGridReady = true;
@@ -208,7 +208,10 @@ export class ResidentialIndexComponent implements OnInit {
           }
         }
       }
-      const params = '?sort=' + sortData + '&skip=' + startRow + '&limit=' + limit + searchData
+      let params = '?sort=' + sortData + '&skip=' + startRow + '&limit=' + limit 
+      if(this.activeTab === 'active'){
+         params += searchData
+      }
       console.log(params)
       resolve(params)
     })

@@ -1,17 +1,24 @@
+
+
+
+<ul class="nav nav-tabs resource-list">
+
+    <li class="nav-item">
+      <a (click)='handleTabClick("active")' [ngClass]="{'selectedTab': activeTab === 'active'}" class="nav-link"
+        routerlink="user-brand" routerlinkactive="active" ng-reflect-router-link="user-brand">Active </a>
+    </li>
+    <li class="nav-item"><a [ngClass]="{'selectedTab': activeTab === 'all'}" class="nav-link" routerlink="edit"
+        routerlinkactive="active" ng-reflect-router-link="edit" (click)='handleTabClick("all")'>All</a></li>
+  </ul>
+
+
+
 <h2 class="residential-index"><i class="fas fa-home"></i> Residential Listings</h2>
-<ag-grid-angular
-    #myGrid
-    style="height: 556px;"
-    class="ag-theme-balham"
-    [rowData]="rowData"
-    [columnDefs]="columnDefs"
-    [gridOptions]="gridOptions"
-    [pagination]=true
-    [paginationPageSize]="17"
-    (cellClicked)="cellClicked($event)"
-    (gridReady)="onGridReady($event)"
->
-</ag-grid-angular>
+<div *ngIf="!isGridReady" style="height:556px;"></div>
+<div *ngIf="isGridReady" style="height:556px;">
+  <ag-grid-angular  #myGrid style="width: 100%; height: 100%" class="ag-theme-balham" [gridOptions]="gridOptions"
+  [columnDefs]="columnDefs" (gridReady)="onGridReady($event)" (cellClicked)="cellClicked($event)"></ag-grid-angular>
+</div>
 
 <button class="btn btn-primary pull-left float-left" (click) = "newListing()"><i class="glyphicon glyphicon-plus fa fa-plus"></i> New Listing</button>
 <hr class="residential-index-hr" />
