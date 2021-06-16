@@ -14,6 +14,10 @@ export class ResidentialService {
   constructor(private http: HttpClient) { }
 
   getGridData(officeId, params){
+    const index = params.indexOf("property24.p24ID__regex");
+    if(index > 0){
+     params = params.replace('property24.p24ID__regex','property24.p24ID');
+    }
     // let filterData = '?data.user.data.office._id=' + officeId + '&data.listingStatus=' + type;
     return this.http.get<any[]>(this.url__residential1 + params, {headers:this.headers})
   }

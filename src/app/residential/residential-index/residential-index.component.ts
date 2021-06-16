@@ -47,7 +47,7 @@ export class ResidentialIndexComponent implements OnInit {
     { headerName: 'PPID', width: 100, field: 'privateProperty', filter: 'agTextColumnFilter', cellRenderer: (data) => {
       if(data.value == 1 || data.value == ''){
         return "-";
-       }else{
+       }else if(data.value){
         return `${data.value}`
        }
       },
@@ -56,7 +56,7 @@ export class ResidentialIndexComponent implements OnInit {
       headerName: 'PP', width: 100, field: 'ppLink', cellRenderer: (data) => {
         if(data.value == 1 || data.value == ''){
           return "-"
-        }else{
+        }else if(data.value){
         return `<a href= ${data.value}
       target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
       }
@@ -65,7 +65,7 @@ export class ResidentialIndexComponent implements OnInit {
     { headerName: 'P24ID', width: 100, field: 'property24', filter: 'agTextColumnFilter', cellRenderer: (data) => {
       if(data.value == 1 || data.value == ''){
         return "-";
-       }else{
+       }else if(data.value){
         return `${data.value}`
        }
       }, sortable: true },
@@ -73,7 +73,7 @@ export class ResidentialIndexComponent implements OnInit {
       headerName: 'P24', width: 100, field: 'p24Link', cellRenderer: (data) => {
         if(data.value == 1 || data.value == ''){
           return "-"
-        }else{
+        }else if(data.value){
         return `<a href= ${data.value}
       target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
       }
