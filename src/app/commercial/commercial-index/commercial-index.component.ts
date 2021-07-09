@@ -26,6 +26,24 @@ export class CommercialIndexComponent implements OnInit {
   public res: string[] = [];
 
   columnDefs = [
+    { headerName: 'Primary Property Practitioner', width: 120, field: 'primaryProperty', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Commercial Type', width: 120, field: 'commercialType', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'City', width: 70, field: 'cityRef', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Suburb', width: 80, field: 'suburbRef', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Address', width: 100, field: 'address', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Listing Type', width: 100, field: 'listingType', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Price', width: 80, field: 'price', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Floor Size', width: 100, field: 'floorSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Office Size', width: 100, field: 'officeSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'F/WH Size', width: 100, field: 'factoryWarehouseSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Retail Size', width: 100, field: 'retailSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Yard Size', width: 120, field: 'yardSpace', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Land Size', width: 120, field: 'landSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Seller Name', width: 150, field: 'sellerName',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Seller Mobile', width: 150, field: 'sellerMobile',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Seller Work Number', width: 150, field: 'sellerWorkNumber',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Seller Email', width: 150, field: 'sellerEmail',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Code', width: 120, field: 'code', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Status', width: 80, field: 'listingStatus', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Created', width: 100, field: 'createdTime', filter: 'agDateColumnFilter', sortable: true,   cellRenderer: (params) => {
       return  this.datepipe.transform(params.value, 'dd/MM/yyyy');
@@ -33,26 +51,7 @@ export class CommercialIndexComponent implements OnInit {
     { headerName: 'Updated', width: 100, field: 'lastUpdated', filter: 'agDateColumnFilter', sortable: true,   cellRenderer: (params) => {
       return  this.datepipe.transform(params.value, 'dd/MM/yyyy');
     } },
-    { headerName: 'Listing Type', width: 120, field: 'listingType', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'City', width: 120, field: 'cityRef', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Suburb', width: 120, field: 'suburbRef', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Commercial Type', width: 120, field: 'commercialType', filter: 'agTextColumnFilter', sortable: true },
-
-    { headerName: 'Mandate Status', width: 120, field: 'mandateStatus', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Code', width: 120, field: 'code', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Primary Property Practitioner', width: 120, field: 'primaryProperty', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Price', width: 120, field: 'price', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Address', width: 240, field: 'address', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Floor Size', width: 120, field: 'floorSize', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Office Size', width: 120, field: 'officeSize', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Factory/Warehouse Size', width: 120, field: 'factoryWarehouseSize', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Retail Size', width: 120, field: 'retailSize', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Yard Size', width: 120, field: 'yardSpace', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Land Size', width: 120, field: 'landSize', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Seller Name', width: 150, field: 'sellerName',filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Seller Mobile', width: 150, field: 'sellerMobile',filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Seller Work Number', width: 150, field: 'sellerWorkNumber',filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Seller Email', width: 150, field: 'sellerEmail',filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Mandate Status', width: 120, field: 'mandateStatus', filter: 'agTextColumnFilter', sortable: true }, 
     { headerName: 'PPID', width: 100, field: 'privateProperty', filter: 'agTextColumnFilter', cellRenderer: (data) => {
       if(data.value == 1 || data.value == ''){
         return "-";
