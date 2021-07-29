@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
+import { FormioAuthService } from 'angular-formio/auth';
 
 type tabTypes = 'active' | 'archived' | 'pending' | 'myListing';
 
@@ -34,7 +35,7 @@ export class PropertyPractitionersComponent implements OnInit {
   rowData: any;
 
 
-  constructor(private http: HttpClient, private router: Router, public datepipe: DatePipe) {
+  constructor(private http: HttpClient, private router: Router, public datepipe: DatePipe,public auth: FormioAuthService) {
 
   }
 
@@ -62,6 +63,9 @@ export class PropertyPractitionersComponent implements OnInit {
 
 
   ngOnInit() {
+    if(!this.auth.authenticated){
+			this.router.navigate(['/auth/login']);
+    }
     this.columnDefs.forEach((ele: any) => {
       if (ele.filter == "agNumberColumnFilter") {
         ele.filterParams = {

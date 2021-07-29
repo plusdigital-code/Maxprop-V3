@@ -7,7 +7,7 @@ import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
-
+import { FormioAuthService } from 'angular-formio/auth';
 @Component({
   selector: 'app-suburblist',
   templateUrl: './suburblist.component.html',
@@ -42,9 +42,13 @@ export class SuburblistComponent implements OnInit {
   totalRows = undefined;
   urlParams = ''
 
-  constructor(private suburbService: SuburbService, private datepipe: DatePipe,private router: Router) { }
+  constructor(private suburbService: SuburbService, private datepipe: DatePipe,private router: Router,public auth: FormioAuthService) { }
 
   ngOnInit() {
+    if(!this.auth.authenticated){
+			this.router.navigate(['/auth/login']);
+    }
+    
     this.suburbService.getGridData().subscribe(resp => {
       this.rowData = resp;
     })

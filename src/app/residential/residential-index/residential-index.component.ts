@@ -7,6 +7,8 @@ import { ResidentialService } from './residential.service';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
+import { FormioAuthService } from 'angular-formio/auth';
+
 
 type tabTypes = 'active' | 'archived' | 'pending' | 'myListing';
 
@@ -119,9 +121,12 @@ export class ResidentialIndexComponent implements OnInit {
   totalRows = undefined;
   urlParams = ''
 
-  constructor(private ResidentialService: ResidentialService, private route: ActivatedRoute, private datepipe: DatePipe, private router: Router,) { }
+  constructor(private ResidentialService: ResidentialService, private route: ActivatedRoute, private datepipe: DatePipe, private router: Router,public auth: FormioAuthService) { }
 
   ngOnInit() {
+    if(!this.auth.authenticated){
+			this.router.navigate(['/auth/login']);
+    }
     this.columnDefs.forEach((ele: any) => {
       if (ele.filter == "agNumberColumnFilter") {
         ele.filterParams = {

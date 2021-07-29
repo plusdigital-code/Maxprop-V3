@@ -71,6 +71,9 @@ export class ResidentialContactComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router,public auth: FormioAuthService) {
   }
   ngOnInit() {
+    if(!this.auth.authenticated){
+			this.router.navigate(['/auth/login']);
+    }
     let a = this.auth.user.roles.find(a => a == "5de422739499161d8586f42f");
     
     this.columnDefs.forEach((ele: any) => {

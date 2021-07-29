@@ -12,6 +12,7 @@ import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
 import { InstantiateExpr } from '@angular/compiler';
+import { FormioAuthService } from 'angular-formio/auth';
 
 
 @Component({
@@ -26,19 +27,22 @@ export class CommercialIndexComponent implements OnInit {
   public res: string[] = [];
 
   columnDefs = [
+    { headerName: 'Updated', width: 100, field: 'lastUpdated', filter: 'agDateColumnFilter', sortable: true,   cellRenderer: (params) => {
+      return  this.datepipe.transform(params.value, 'dd/MM/yyyy');
+    } },
     { headerName: 'Primary Property Practitioner', width: 120, field: 'primaryProperty', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Commercial Type', width: 120, field: 'commercialType', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'City', width: 70, field: 'cityRef', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Suburb', width: 80, field: 'suburbRef', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Address', width: 100, field: 'address', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Address', width: 220, field: 'address', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Listing Type', width: 100, field: 'listingType', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Price', width: 80, field: 'price', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Floor Size', width: 100, field: 'floorSize', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Office Size', width: 100, field: 'officeSize', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'F/WH Size', width: 100, field: 'factoryWarehouseSize', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Retail Size', width: 100, field: 'retailSize', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Yard Size', width: 120, field: 'yardSpace', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'Land Size', width: 120, field: 'landSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'F Size', width: 90, field: 'floorSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Off.Size', width: 90, field: 'officeSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'F/WH Size', width: 90, field: 'factoryWarehouseSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'R Size', width: 90, field: 'retailSize', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Y Size', width: 90, field: 'yardSpace', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'L Size', width: 90, field: 'landSize', filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'Seller Name', width: 150, field: 'sellerName',filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Seller Mobile', width: 150, field: 'sellerMobile',filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Seller Work Number', width: 150, field: 'sellerWorkNumber',filter: 'agTextColumnFilter', sortable: true },
@@ -46,9 +50,6 @@ export class CommercialIndexComponent implements OnInit {
     { headerName: 'Code', width: 120, field: 'code', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Status', width: 80, field: 'listingStatus', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Created', width: 100, field: 'createdTime', filter: 'agDateColumnFilter', sortable: true,   cellRenderer: (params) => {
-      return  this.datepipe.transform(params.value, 'dd/MM/yyyy');
-    } },
-    { headerName: 'Updated', width: 100, field: 'lastUpdated', filter: 'agDateColumnFilter', sortable: true,   cellRenderer: (params) => {
       return  this.datepipe.transform(params.value, 'dd/MM/yyyy');
     } },
     { headerName: 'Mandate Status', width: 120, field: 'mandateStatus', filter: 'agTextColumnFilter', sortable: true }, 
@@ -121,7 +122,7 @@ export class CommercialIndexComponent implements OnInit {
   rowData: any;
 
 
-  constructor(private http: HttpClient, private router: Router, public datepipe: DatePipe) {
+  constructor(private http: HttpClient, private router: Router, public datepipe: DatePipe,public auth: FormioAuthService) {
 
   }
 
@@ -164,6 +165,9 @@ export class CommercialIndexComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(!this.auth.authenticated){
+			this.router.navigate(['/auth/login']);
+    }
     this.gridData(this.a);
   }
   gridData(a) {
@@ -180,20 +184,20 @@ export class CommercialIndexComponent implements OnInit {
             return this.data.push({
               "address": element.data.address.formatted_address,
               "listingType": element.data.listingType,
-              "suburbRef": element.data.suburbRef.data?element.data.suburbRef.data.suburb:'',
-              "cityRef": element.data.cityRef.data?element.data.cityRef.data.city:'',
-              "commercialType": element.data.commercialType.data ? element.data.commercialType.data.commercialType : '',
+              "suburbRef": element.data.suburbRef.data?element.data.suburbRef.data.suburb:'-',
+              "cityRef": element.data.cityRef.data?element.data.cityRef.data.city:'-',
+              "commercialType": element.data.commercialType.data ? element.data.commercialType.data.commercialType : '-',
               "mandateStatus": element.data.mandateStatus,
-              "floorSize": element.data.floorSizeInfo.floorSize,
-              "landSize": element.data.sizeLandSizeInfo.landSize,
-              "factoryWarehouseSize": element.data.factoryWarehouseSize,
-              "officeSize": element.data.officeSize,
-              "retailSize": element.data.retailSize,
-              "yardSpace": element.data.yardSpace,
+              "floorSize": element.data.floorSizeInfo.floorSize?Number(element.data.floorSizeInfo.floorSize).toLocaleString('en-GB'):'-',
+              "landSize": element.data.sizeLandSizeInfo.landSize?Number(element.data.sizeLandSizeInfo.landSize).toLocaleString('en-GB'):'-',
+              "factoryWarehouseSize": element.data.factoryWarehouseSize?Number(element.data.factoryWarehouseSize).toLocaleString('en-GB'):'-',
+              "officeSize": element.data.officeSize?Number(element.data.officeSize).toLocaleString('en-GB'):'-',
+              "retailSize": element.data.retailSize?Number(element.data.retailSize).toLocaleString('en-GB'):'-',
+              "yardSpace": element.data.yardSpace?Number(element.data.yardSpace).toLocaleString('en-GB'):'-',
               "listingStatus": element.data.listingStatus,
               "code": element.data.mandateMetaData.code,
-              "primaryProperty": element.data.user.data ? element.data.user.data.firstName + " " + element.data.user.data.lastName : '',
-              "price": element.data.price,
+              "primaryProperty": element.data.user.data ? element.data.user.data.firstName + " " + element.data.user.data.lastName : '-',
+              "price": element.data.price?Number(element.data.price).toLocaleString('en-GB'):'-',
               "id": element._id,
               "createdTime": new Date(element.created),
               "lastUpdated": new Date(element.created),

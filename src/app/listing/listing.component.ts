@@ -7,6 +7,7 @@ import { ListingService } from './listing.service';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
+import { FormioAuthService } from 'angular-formio/auth';
 
 type tabTypes = 'active' | 'archived' | 'pending' | 'myListing';
 
@@ -18,6 +19,40 @@ type tabTypes = 'active' | 'archived' | 'pending' | 'myListing';
 export class ListingComponent implements OnInit {
   @ViewChild('agGrid') agGrid: AgGridAngular;
   columnDefs = [
+    { headerName: 'Primary Property Practitioner', width: 200, field: 'primaryProperty', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Property Type', width: 120, field: 'propertyType', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Price', width: 120, field: 'price', filter: 'agNumberColumnFilter', sortable: true },
+    { headerName: 'Suburb', width: 140, field: 'suburb', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Scheme Name', width: 150, field: 'sectionalSchemeName', filter: 'agTextColumnFilter', sortable: true },
+    {
+      headerName: 'PP', width: 100, field: 'ppLink', cellRenderer: (data) => {
+        if (!data.value) {
+          return
+        }
+        if (data.value == 1 || data.value == '') {
+          return "-"
+        } else {
+          return `<a href= ${data.value}
+      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
+        }
+      }, sortable: true
+    },
+    {
+      headerName: 'P24', width: 100, field: 'p24Link', cellRenderer: (data) => {
+        if (!data.value) {
+          return
+        }
+        if (data.value == 1 || data.value == '') {
+          return "-"
+        } else {
+          return `<a href= ${data.value}
+      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
+        }
+      },
+      sortable: true
+    },
+    { headerName: 'City', width: 80, field: 'city', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Address', width: 250, field: 'address', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Code', width: 130, field: 'code', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Type', width: 80, field: 'listingType', filter: 'agTextColumnFilter', sortable: true },
     {
@@ -30,14 +65,7 @@ export class ListingComponent implements OnInit {
         return this.datepipe.transform(params.value, 'dd/MM/yyyy');
       }
     },
-    { headerName: 'Primary Property Practitioner', width: 200, field: 'primaryProperty', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Property Type', width: 120, field: 'propertyType', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Price', width: 120, field: 'price', filter: 'agNumberColumnFilter', sortable: true },
-    { headerName: 'City', width: 80, field: 'city', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Suburb', width: 140, field: 'suburb', filter: 'agTextColumnFilter', sortable: true },
-    { headerName: 'Address', width: 250, field: 'address', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'Unit Number', width: 120, field: 'unitNumber' },
-    { headerName: 'Scheme Name', width: 150, field: 'sectionalSchemeName', filter: 'agTextColumnFilter', sortable: true },
     { headerName: 'No. Of Bedrooms', width: 140, field: 'bedrooms', filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'No. Of Bathrooms', width: 140, field: 'bathrooms', filter: 'agNumberColumnFilter', sortable: true },
     { headerName: 'Garages', width: 100, field: 'garages', filter: 'agNumberColumnFilter', sortable: true },
@@ -58,19 +86,6 @@ export class ListingComponent implements OnInit {
       sortable: true
     },
     {
-      headerName: 'PP', width: 100, field: 'ppLink', cellRenderer: (data) => {
-        if (!data.value) {
-          return
-        }
-        if (data.value == 1 || data.value == '') {
-          return "-"
-        } else {
-          return `<a href= ${data.value}
-      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
-        }
-      }, sortable: true
-    },
-    {
       headerName: 'P24ID', width: 100, field: 'property24', filter: 'agTextColumnFilter', cellRenderer: (data) => {
         if (!data.value) {
           return
@@ -82,20 +97,6 @@ export class ListingComponent implements OnInit {
           return `${data.value}`
         }
       }, sortable: true
-    },
-    {
-      headerName: 'P24', width: 100, field: 'p24Link', cellRenderer: (data) => {
-        if (!data.value) {
-          return
-        }
-        if (data.value == 1 || data.value == '') {
-          return "-"
-        } else {
-          return `<a href= ${data.value}
-      target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>`;
-        }
-      },
-      sortable: true
     },
     {
       headerName: 'Listing Brochure', width: 100, field: 'listingBrochure', cellRenderer: (data) => {
@@ -136,9 +137,12 @@ export class ListingComponent implements OnInit {
   totalRows = undefined;
   urlParams = ''
 
-  constructor(private listingService: ListingService, private route: ActivatedRoute, private datepipe: DatePipe, private router: Router,) { }
+  constructor(private listingService: ListingService, private route: ActivatedRoute, private datepipe: DatePipe, private router: Router,public auth: FormioAuthService) { }
 
   ngOnInit() {
+    if(!this.auth.authenticated){
+			this.router.navigate(['/auth/login']);
+    }
     this.officeId = this.route.snapshot.params.officeId;
     this.columnDefs.forEach((ele: any) => {
       if (ele.filter == "agNumberColumnFilter") {
