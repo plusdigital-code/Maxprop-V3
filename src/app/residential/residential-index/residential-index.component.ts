@@ -10,7 +10,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
 import { FormioAuthService } from 'angular-formio/auth';
 
 
-type tabTypes = 'active' | 'archived' | 'pending' | 'myListing';
+type tabTypes = 'active' | 'archived' | 'pending' | 'myListing'|'all';
 
 @Component({
   selector: 'app-residential-index',
