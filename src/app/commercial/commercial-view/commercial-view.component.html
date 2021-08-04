@@ -620,8 +620,8 @@
     </div>
     <div class="col-md-4">
       <div class="list-group">
-        <!--
-        <a href="https://www.maxprop.co.za/commercial/listing-{{service.resource?.data.codeDisplay}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
+        
+        <a href="https://www.maxprop.co.za/commercial/{{service.resource?.data.codeDisplay}}" *ngIf = "service.resource?.data?.web?.cmsLandingPageId != 'webCMSIDSwitch'" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">Website Page</h5>
             <small><i class="fa fa-file"></i></small>
@@ -630,7 +630,7 @@
           </p>
           <small>Open in new tab</small>
         </a>
-        <a href="https://www.maxprop.co.za/commercial-pages/{{service.resource?.data.codeDisplay}}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a href="https://www.maxprop.co.za/commercial-pages/{{service.resource?.data.codeDisplay}}" target="_blank" *ngIf = "service.resource?.data?.web?.webCMSID != 'webCMSIDSwitch'" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">Landing Page</h5>
             <small class="text-muted"><i class="fa fa-file"></i></small>
@@ -638,7 +638,7 @@
           <p class="mb-1">View this property’s dedicated landing page and share the URL with prospective clients.
           </p>
           <small class="text-muted">Open in new tab</small>
-        </a>-->
+        </a>
        
         <a href="{{service.resource?.data.brochures?.showHouseBrochure }}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
