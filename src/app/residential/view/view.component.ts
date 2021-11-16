@@ -25,6 +25,7 @@ export class ViewComponent extends FormioResourceViewComponent {
         position: pointer,
         map: map,
       });
+      console.log("this",this.service.resource.data.web,this.service.resource.data.codeDisplay);
     },1000)
   }
 }

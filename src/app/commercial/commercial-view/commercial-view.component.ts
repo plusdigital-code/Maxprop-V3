@@ -27,6 +27,7 @@ export class CommercialViewComponent extends FormioResourceViewComponent {
       } catch(error){
         this.ngAfterViewInit()
       }
+      console.log("this",this.service.resource.data);
     },2000)
   }
 

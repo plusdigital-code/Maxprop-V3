@@ -6,10 +6,15 @@ declare var $: any;
     templateUrl: './user-edit.component.html',
 })
 export class EditComponent extends FormioResourceEditComponent {
+    password:any;
+    ispass = true;
     ngDoCheck() {
+        
         var passwordElement = document.getElementsByClassName("formio-component-password");
-        if (passwordElement.length > 0) {
-            $(".formio-component-password").hide();
+        if (this.service.resource.data && this.service.resource.data.password && this.ispass) {
+            this.password = this.service.resource.data.password;
+            this.ispass = false;
+            //$(".formio-component-password").hide();
         }
         $('button.btn-wizard-nav-next').on("click", function () {
             window.scrollTo(0, 0);
@@ -19,7 +24,7 @@ export class EditComponent extends FormioResourceEditComponent {
         });
     }
     submitPasswordDelete(submission) {
-        if (submission.data && submission.data.password) {
+        if (this.password == submission.data.password) {
             delete submission.data.password;
         }
     }
