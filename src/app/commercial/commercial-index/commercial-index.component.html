@@ -28,23 +28,30 @@
 </div>
 
 <ul _ngcontent-ejg-c4="" class="nav nav-tabs resource-list">
-  <li class="nav-item"><a _ngcontent-ejg-c4="" [ngClass]="{'underline_active': a === 'active'}" (click)='gridData("active")' class="nav-link" routerlink="user-brand"
-      routerlinkactive="active" ng-reflect-router-link="user-brand">Active</a></li>
-  <li class="nav-item"><a _ngcontent-ejg-c4="" [ngClass]="{'underline_active': a === 'archived'}" class="nav-link" routerlink="edit" routerlinkactive="active"
-      ng-reflect-router-link="edit" (click)='gridData("archived")'>Archived</a></li>
-  <li class="nav-item"><a _ngcontent-ejg-c4="" [ngClass]="{'underline_active': a === 'pending'}" class="nav-link" routerlink="edit" routerlinkactive="active"
-      ng-reflect-router-link="edit" (click)='gridData("pending")'>Pending</a></li>
+  <li class="nav-item"><a _ngcontent-ejg-c4="" [ngClass]="{'underline_active': a === 'active'}"
+      (click)='handleTabClick("active")' class="nav-link" routerlink="user-brand" routerlinkactive="active"
+      ng-reflect-router-link="user-brand">Active</a></li>
+  <li class="nav-item"><a _ngcontent-ejg-c4="" [ngClass]="{'underline_active': a === 'archived'}" class="nav-link"
+      routerlink="edit" routerlinkactive="active" ng-reflect-router-link="edit"
+      (click)='handleTabClick("archived")'>Archived</a></li>
+  <li class="nav-item"><a _ngcontent-ejg-c4="" [ngClass]="{'underline_active': a === 'pending'}" class="nav-link"
+      routerlink="edit" routerlinkactive="active" ng-reflect-router-link="edit"
+      (click)='handleTabClick("pending")'>Pending</a></li>
 
-  <li class="nav-item"><a _ngcontent-ejg-c4="" [ngClass]="{'underline_active': a === 'myListing'}" class="nav-link" routerlink="edit" routerlinkactive="active"
-      ng-reflect-router-link="edit" (click)='myListing()'>
+  <li class="nav-item"><a _ngcontent-ejg-c4="" [ngClass]="{'underline_active': a === 'myListing'}" class="nav-link"
+      routerlink="edit" routerlinkactive="active" ng-reflect-router-link="edit" (click)='handleTabClick("myListing")'>
       My Listing</a></li>
-  <li class="nav-item"><a _ngcontent-ejg-c4=""  class="nav-link" routerlink="edit" routerlinkactive="active"
+  <li class="nav-item"><a _ngcontent-ejg-c4="" class="nav-link" routerlink="edit" routerlinkactive="active"
       ng-reflect-router-link="edit" (click)='clearFilters()'>
       Reset Filters</a></li>
 </ul>
-<ag-grid-angular #myGrid style="height: 556px;" class="ag-theme-balham" [rowData]="rowData" [columnDefs]="columnDefs"
-  [gridOptions]="gridOptions" [pagination]=true [paginationPageSize]="17" (cellClicked)="cellClicked($event)">
-</ag-grid-angular>
+<div *ngIf="!isGridReady" style="height:556px;"></div>
+<div *ngIf="isGridReady" style="height:556px;">
+<ag-grid-angular  #myGrid style="width: 100%; height: 100%" class="ag-theme-balham" [gridOptions]="gridOptions"
+[columnDefs]="columnDefs" (gridReady)="onGridReady($event)" (cellClicked)="cellClicked($event)"></ag-grid-angular>
+</div>
+<!-- <ag-grid-angular  #myGrid style="width: 100%; height: 100%" class="ag-theme-balham" [gridOptions]="gridOptions"
+[columnDefs]="columnDefs" (gridReady)="onGridReady($event)" (cellClicked)="cellClicked($event)"></ag-grid-angular> -->
 
 <button class="btn btn-primary pull-left float-left" (click)="newListing()"><i
     class="glyphicon glyphicon-plus fa fa-plus"></i> New Listing</button>
